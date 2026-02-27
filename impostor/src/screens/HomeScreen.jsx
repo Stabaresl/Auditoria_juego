@@ -1,6 +1,6 @@
 import styles from './HomeScreen.module.css'
 
-export default function HomeScreen({ chapters, onSelect }) {
+export default function HomeScreen({ chapters, onSelect, onOnline }) {
   return (
     <div className={styles.root}>
       {/* Fondo decorativo */}
@@ -36,13 +36,12 @@ export default function HomeScreen({ chapters, onSelect }) {
         {/* Instrucciones rápidas */}
         <div className={styles.steps}>
           {[
-            { icon: '👥', label: '2–6 jugadores', desc: 'Cada uno recibe un concepto en secreto' },
+            { icon: '👥', label: '2–6 jugadores',  desc: 'Cada uno recibe un concepto en secreto' },
             { icon: '🎭', label: 'Hay un impostor', desc: 'Su concepto es inventado — no lo sabe nadie más' },
             { icon: '🗣️', label: 'Debatid 3 rondas', desc: 'Defended vuestro concepto sin revelar nada' },
-            { icon: '🗳️', label: 'Votad', desc: '¿Quién es el infiltrado? Si acertáis, ganáis' },
+            { icon: '🗳️', label: 'Votad',           desc: '¿Quién es el infiltrado? Si acertáis, ganáis' },
           ].map((s, i) => (
-            <div className={styles.step} key={i}
-              style={{ animationDelay: `${i * 0.07}s` }}>
+            <div className={styles.step} key={i} style={{ animationDelay: `${i * 0.07}s` }}>
               <span className={styles.stepIcon}>{s.icon}</span>
               <div>
                 <div className={styles.stepLabel}>{s.label}</div>
@@ -52,10 +51,22 @@ export default function HomeScreen({ chapters, onSelect }) {
           ))}
         </div>
 
-        {/* Capítulos */}
+        {/* ── Selector de modo ── */}
+        <div className={styles.modeRow}>
+          <div className={styles.modeCard} onClick={onOnline}>
+            <div className={styles.modeIcon}>🌐</div>
+            <div className={styles.modeInfo}>
+              <div className={styles.modeTitle}>Modo online</div>
+              <div className={styles.modeDesc}>Cada jugador en su propio dispositivo</div>
+            </div>
+            <div className={styles.modeArrow}>→</div>
+          </div>
+        </div>
+
+        {/* Capítulos — modo local */}
         <div className={styles.chaptersTitle}>
           <span className={styles.line} />
-          <span>Elige un capítulo</span>
+          <span>Jugar local — elige capítulo</span>
           <span className={styles.line} />
         </div>
 

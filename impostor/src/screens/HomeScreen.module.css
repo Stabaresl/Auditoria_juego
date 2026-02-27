@@ -142,6 +142,62 @@
 }
 .stepDesc { font-size: 0.75rem; color: #9999b5; line-height: 1.4; }
 
+/* ── Modo online ── */
+.modeRow {
+  width: 100%;
+  animation: fadeUp 0.4s 0.22s ease both;
+}
+.modeCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.3rem;
+  background: rgba(123,92,255,0.06);
+  border: 1.5px solid rgba(123,92,255,0.25);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.modeCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(123,92,255,0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.modeCard:hover {
+  border-color: rgba(123,92,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(123,92,255,0.15);
+}
+.modeCard:hover::before { opacity: 1; }
+.modeIcon { font-size: 1.6rem; flex-shrink: 0; }
+.modeInfo { flex: 1; }
+.modeTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #eeeef5;
+  margin-bottom: 0.15rem;
+}
+.modeDesc {
+  font-size: 0.78rem;
+  color: #9999b5;
+}
+.modeArrow {
+  font-size: 1rem;
+  color: rgba(123,92,255,0.6);
+  transition: all 0.2s;
+}
+.modeCard:hover .modeArrow {
+  color: #7b5cff;
+  transform: translateX(4px);
+}
+
+/* ── Capítulos ── */
 .chaptersTitle {
   display: flex;
   align-items: center;
@@ -233,6 +289,6 @@
 }
 
 @media (max-width: 560px) {
-  .steps { grid-template-columns: 1fr; }
+  .steps    { grid-template-columns: 1fr; }
   .chapters { grid-template-columns: 1fr; }
 }

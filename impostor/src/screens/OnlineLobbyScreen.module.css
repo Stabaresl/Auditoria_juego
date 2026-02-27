@@ -1,0 +1,183 @@
+/* OnlineLobbyScreen.module.css */
+.root {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+}
+.bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.orb {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,92,255,0.08) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem,7vw,3rem);
+  letter-spacing: 0.04em;
+  color: #eeeef5;
+  line-height: 1;
+}
+.subtitle {
+  font-size: 0.88rem;
+  color: #9999b5;
+  line-height: 1.5;
+}
+.subtitle strong { color: #eeeef5; }
+
+/* ── Código ── */
+.codeCard {
+  background: rgba(15,15,26,0.95);
+  border: 2px solid rgba(123,92,255,0.3);
+  border-radius: 18px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  animation: fadeUp 0.35s ease both;
+}
+.codeLabel {
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #9999b5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.codeDisplay {
+  display: flex;
+  gap: 0.4rem;
+}
+.codeLetter {
+  width: 44px; height: 54px;
+  background: rgba(123,92,255,0.1);
+  border: 2px solid rgba(123,92,255,0.35);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #eeeef5;
+  letter-spacing: 0;
+}
+.copyBtn { font-size: 0.8rem !important; }
+
+/* ── Jugadores ── */
+.playersSection { display: flex; flex-direction: column; gap: 0.6rem; }
+.sectionLabel {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #9999b5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.waiting { color: rgba(153,153,181,0.5); font-weight: 400; }
+
+.playerList { display: flex; flex-direction: column; gap: 0.45rem; }
+
+.playerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  animation: fadeUp 0.3s ease both;
+}
+.myRow {
+  border-color: rgba(240,224,64,0.25);
+  background: rgba(240,224,64,0.03);
+}
+.avatar {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem;
+  color: #080810; flex-shrink: 0;
+}
+.playerName {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #eeeef5;
+}
+.badges { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+
+.emptyRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  background: rgba(255,255,255,0.01);
+  border: 1px dashed rgba(255,255,255,0.05);
+  border-radius: 10px;
+  opacity: 0.5;
+}
+.emptyAvatar {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: #9999b5; font-size: 0.9rem;
+}
+.emptyName {
+  font-size: 0.82rem;
+  color: rgba(153,153,181,0.4);
+  font-style: italic;
+}
+
+/* ── Acciones ── */
+.actions { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.hostHint {
+  background: rgba(240,224,64,0.04);
+  border: 1px solid rgba(240,224,64,0.12);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.78rem;
+  color: #9999b5;
+  line-height: 1.5;
+  text-align: center;
+}
+.hostHint strong { color: #f0e040; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 420px) {
+  .codeDisplay { gap: 0.25rem; }
+  .codeLetter  { width: 38px; height: 48px; font-size: 1.3rem; }
+}
