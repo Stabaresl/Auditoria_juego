@@ -1,0 +1,167 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+}
+.bg {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,61,90,0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.3rem;
+  text-align: center;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.voterFlow {
+  display: flex;
+  gap: 0.4rem;
+}
+.voterDot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #9999b5;
+  transition: all 0.2s;
+}
+.dotDone {
+  background: rgba(61,255,192,0.1);
+  border-color: #3dffc0;
+  color: #3dffc0;
+}
+.dotActive {
+  background: rgba(255,61,90,0.1);
+  color: #eeeef5;
+  font-weight: 700;
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem,8vw,3rem);
+  letter-spacing: 0.04em;
+  color: #eeeef5;
+  line-height: 1.1;
+}
+.titleAccent { color: #ff3d5a; }
+
+.voterCard {
+  width: 100%;
+  background: rgba(15,15,26,0.95);
+  border: 2px solid;
+  border-radius: 16px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeUp 0.3s ease both;
+}
+.voterLabel {
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #9999b5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.voterAvatar {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #080810;
+}
+.voterName {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+}
+
+.selectLabel {
+  font-size: 0.82rem;
+  color: #9999b5;
+  text-align: left;
+  width: 100%;
+}
+
+.candidates {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.candidateBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+.candidateBtn:hover {
+  border-color: rgba(255,61,90,0.4);
+  background: rgba(255,61,90,0.06);
+}
+.candidateSelected {
+  animation: shake 0.3s ease;
+}
+.candAvatar {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #080810;
+  flex-shrink: 0;
+}
+.candName {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #eeeef5;
+}
+.candCheck {
+  font-size: 1.1rem;
+  color: #ff3d5a;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shake {
+  0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)}
+}

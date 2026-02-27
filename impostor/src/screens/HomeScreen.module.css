@@ -1,0 +1,238 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb1 {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,224,64,0.07) 0%, transparent 70%);
+  top: -200px; left: -150px;
+}
+.orb2 {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,92,255,0.07) 0%, transparent 70%);
+  bottom: -100px; right: -100px;
+}
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 99px;
+  background: rgba(240,224,64,0.08);
+  border: 1px solid rgba(240,224,64,0.2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #f0e040;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: fadeUp 0.4s ease both;
+}
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #f0e040;
+  animation: pulse 1.5s infinite;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  animation: fadeUp 0.4s 0.05s ease both;
+}
+.titleLine1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  line-height: 1;
+  color: #eeeef5;
+  letter-spacing: 0.04em;
+}
+.titleLine2 {
+  position: relative;
+  display: inline-block;
+}
+.titleAccent {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  line-height: 1;
+  color: #f0e040;
+  letter-spacing: 0.04em;
+}
+.underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  width: 100%;
+  color: #f0e040;
+  opacity: 0.6;
+}
+
+.subtitle {
+  max-width: 480px;
+  color: #9999b5;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  animation: fadeUp 0.4s 0.1s ease both;
+}
+.subtitle strong { color: #f0e040; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+  animation: fadeUp 0.4s 0.15s ease both;
+}
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  text-align: left;
+  animation: fadeUp 0.4s ease both;
+}
+.stepIcon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+.stepLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #eeeef5;
+  margin-bottom: 0.15rem;
+}
+.stepDesc { font-size: 0.75rem; color: #9999b5; line-height: 1.4; }
+
+.chaptersTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #9999b5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: fadeUp 0.4s 0.25s ease both;
+}
+.line { flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+
+.chapters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+.chapterCard {
+  position: relative;
+  background: rgba(15,15,26,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  animation: fadeUp 0.4s ease both;
+  overflow: hidden;
+}
+.chapterCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.chapterCard:hover {
+  border-color: rgba(255,255,255,0.18);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.chapterCard:hover::before { opacity: 1; }
+.chNum {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
+}
+.chName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #eeeef5;
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+.chDesc {
+  font-size: 0.78rem;
+  color: #9999b5;
+  margin-bottom: 0.6rem;
+}
+.chMeta {
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(153,153,181,0.6);
+}
+.chArrow {
+  position: absolute;
+  bottom: 1.2rem; right: 1.4rem;
+  font-size: 1rem;
+  color: rgba(153,153,181,0.4);
+  transition: all 0.2s;
+}
+.chapterCard:hover .chArrow {
+  color: #eeeef5;
+  transform: translateX(4px);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.3; }
+}
+
+@media (max-width: 560px) {
+  .steps { grid-template-columns: 1fr; }
+  .chapters { grid-template-columns: 1fr; }
+}

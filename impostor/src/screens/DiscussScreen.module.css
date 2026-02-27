@@ -1,0 +1,139 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+}
+.bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.orb {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,224,64,0.05) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  transition: background 0.5s;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem,8vw,3.2rem);
+  letter-spacing: 0.04em;
+  color: #eeeef5;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: #9999b5;
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+.timerWrap {
+  position: relative;
+  width: 128px; height: 128px;
+}
+.timerInner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.timerTime {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  transition: color 0.3s;
+  line-height: 1;
+}
+.timerLabel {
+  font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #9999b5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.2rem;
+}
+
+.playerChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.chipDot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+.tips {
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  text-align: left;
+}
+.tipTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #f0e040;
+  margin-bottom: 0.5rem;
+}
+.tipList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.tipList li {
+  font-size: 0.8rem;
+  color: #9999b5;
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.4;
+}
+.tipList li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: rgba(240,224,64,0.5);
+}
+
+.actions { width: 100%; }

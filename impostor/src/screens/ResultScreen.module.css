@@ -1,0 +1,154 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1.5rem 4rem;
+  overflow: hidden;
+}
+.bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.orb {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.5s;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeUp 0.4s ease both;
+}
+
+.outcomeCard {
+  background: rgba(15,15,26,0.96);
+  border: 2px solid;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.outcomeEmoji { font-size: 3rem; }
+.outcomeTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.6rem,6vw,2.4rem);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+.outcomeDesc {
+  font-size: 0.9rem;
+  color: #9999b5;
+  line-height: 1.5;
+}
+
+.section { display: flex; flex-direction: column; gap: 0.8rem; }
+.sectionTitle {
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #9999b5;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.impostorReveal {
+  background: rgba(15,15,26,0.95);
+  border: 2px solid;
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.impostorAv {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.1rem;
+  color: #080810; flex-shrink: 0;
+}
+.impostorName {
+  flex: 1;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+.conceptsList { display: flex; flex-direction: column; gap: 0.6rem; }
+.conceptItem {
+  background: rgba(15,15,26,0.95);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid;
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: border-color 0.2s;
+}
+.conceptFake {
+  background: rgba(255,61,90,0.04);
+  border-color: rgba(255,61,90,0.2) !important;
+  border-left-color: #ff3d5a !important;
+}
+.conceptItemHeader {
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.playerChip {
+  padding: 0.15rem 0.6rem;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.conceptItemName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #eeeef5;
+}
+.conceptItemDef {
+  font-size: 0.78rem;
+  color: #9999b5;
+  line-height: 1.5;
+}
+
+.roundHistory { display: flex; flex-direction: column; gap: 0.5rem; }
+.roundItem {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.roundNum {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: #9999b5;
+  min-width: 60px;
+}
+.roundResult { font-size: 0.82rem; font-weight: 600; flex: 1; }
+.roundTally { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.tallyItem {
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
