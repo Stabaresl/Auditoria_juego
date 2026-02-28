@@ -1,91 +1,115 @@
-import styles from './HomeScreen.module.css'
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import AnimatedBg from '../AnimatedBg'
+import s from './HomeScreen.module.css'
+
+const STEPS = [
+  { icon:'👥', label:'2 – 6 jugadores', desc:'Cada uno recibe un concepto distinto en secreto' },
+  { icon:'🎭', label:'Un impostor oculto', desc:'Su concepto es inventado — nadie más lo sabe' },
+  { icon:'🗣️', label:'3 rondas de debate', desc:'Defended vuestro concepto sin revelar el nombre' },
+  { icon:'🗳️', label:'Votad al infiltrado', desc:'Si acertáis ganáis; si falla el impostor sobrevive' },
+]
 
 export default function HomeScreen({ chapters, onSelect, onOnline }) {
   return (
-    <div className={styles.root}>
-      {/* Fondo decorativo */}
-      <div className={styles.bg}>
-        <div className={styles.orb1} />
-        <div className={styles.orb2} />
-        <div className={styles.grid} />
-      </div>
+    <div className={s.root}>
+      <AnimatedBg theme="home" />
+      <div className={s.inner}>
 
-      <div className={styles.inner}>
-        {/* Header */}
-        <div className={styles.badge}>
-          <span className={styles.dot} />
-          <span>Juego académico interactivo</span>
-        </div>
+        {/* Badge live */}
+        <motion.div className={s.badge}
+          initial={{ opacity:0, y:-14 }} animate={{ opacity:1, y:0 }} transition={{ delay:.1 }}>
+          <motion.span className={s.dot} animate={{ opacity:[1,.2,1] }} transition={{ duration:1.4, repeat:Infinity }}/>
+          Juego académico interactivo
+        </motion.div>
 
-        <h1 className={styles.title}>
-          <span className={styles.titleLine1}>El Concepto</span>
-          <span className={styles.titleLine2}>
-            <span className={styles.titleAccent}>Infiltrado</span>
-            <svg className={styles.underline} viewBox="0 0 300 12" fill="none">
-              <path d="M2 9 Q75 2 150 9 Q225 16 298 9" stroke="currentColor"
-                strokeWidth="3" strokeLinecap="round"/>
-            </svg>
-          </span>
-        </h1>
-
-        <p className={styles.subtitle}>
-          Uno de los conceptos es falso. Solo el <strong>impostor</strong> lo sabe.
-          Los demás deben descubrirlo antes de que se agoten las 3 rondas.
-        </p>
-
-        {/* Instrucciones rápidas */}
-        <div className={styles.steps}>
-          {[
-            { icon: '👥', label: '2–6 jugadores',  desc: 'Cada uno recibe un concepto en secreto' },
-            { icon: '🎭', label: 'Hay un impostor', desc: 'Su concepto es inventado — no lo sabe nadie más' },
-            { icon: '🗣️', label: 'Debatid 3 rondas', desc: 'Defended vuestro concepto sin revelar nada' },
-            { icon: '🗳️', label: 'Votad',           desc: '¿Quién es el infiltrado? Si acertáis, ganáis' },
-          ].map((s, i) => (
-            <div className={styles.step} key={i} style={{ animationDelay: `${i * 0.07}s` }}>
-              <span className={styles.stepIcon}>{s.icon}</span>
-              <div>
-                <div className={styles.stepLabel}>{s.label}</div>
-                <div className={styles.stepDesc}>{s.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* ── Selector de modo ── */}
-        <div className={styles.modeRow}>
-          <div className={styles.modeCard} onClick={onOnline}>
-            <div className={styles.modeIcon}>🌐</div>
-            <div className={styles.modeInfo}>
-              <div className={styles.modeTitle}>Modo online</div>
-              <div className={styles.modeDesc}>Cada jugador en su propio dispositivo</div>
-            </div>
-            <div className={styles.modeArrow}>→</div>
+        {/* Título con glitch cada 3s */}
+        <motion.div initial={{ opacity:0, y:36 }} animate={{ opacity:1, y:0 }}
+          transition={{ delay:.22, duration:.65, ease:[.16,1,.3,1] }}>
+          <div className={s.titleLine1}>El Concepto</div>
+          <div className={s.titleLine2}>
+            <span className={`${s.accent} glitch`} data-g="Infiltrado">Infiltrado</span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Capítulos — modo local */}
-        <div className={styles.chaptersTitle}>
-          <span className={styles.line} />
-          <span>Jugar local — elige capítulo</span>
-          <span className={styles.line} />
-        </div>
+        <motion.p className={s.sub}
+          initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.42 }}>
+          Uno de los conceptos es <strong>falso</strong>. Solo el impostor lo sabe.
+          Descúbrelo antes de que sobreviva las 3 rondas.
+        </motion.p>
 
-        <div className={styles.chapters}>
-          {chapters.map((ch, i) => (
-            <button key={ch.id} className={styles.chapterCard}
-              style={{ animationDelay: `${0.3 + i * 0.1}s` }}
-              onClick={() => onSelect(ch)}>
-              <div className={styles.chNum} style={{ color: i === 0 ? '#f0e040' : '#7b5cff' }}>
-                CAP. {ch.num}
+        {/* Steps */}
+        <div className={s.steps}>
+          {STEPS.map((st, i) => (
+            <motion.div key={i} className={s.step}
+              initial={{ opacity:0, x:-22 }} animate={{ opacity:1, x:0 }}
+              transition={{ delay:.5+i*.07, ease:[.16,1,.3,1] }}
+              whileHover={{ x:5, transition:{ duration:.18 } }}>
+              <span className={s.stepIcon}>{st.icon}</span>
+              <div>
+                <div className={s.stepLabel}>{st.label}</div>
+                <div className={s.stepDesc}>{st.desc}</div>
               </div>
-              <div className={styles.chName}>{ch.name}</div>
-              <div className={styles.chDesc}>{ch.description}</div>
-              <div className={styles.chMeta}>
-                {ch.rounds.length} rondas · {ch.rounds[0].concepts.length} conceptos por ronda
-              </div>
-              <div className={styles.chArrow}>→</div>
-            </button>
+            </motion.div>
           ))}
+        </div>
+
+        {/* Divisor */}
+        <motion.div className={s.divider} initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.75 }}>
+          <span className={s.divLine}/><span>Elige un capítulo</span><span className={s.divLine}/>
+        </motion.div>
+
+        {/* Capítulos */}
+        <div className={s.cards}>
+          {chapters.map((ch, i) => {
+            const col = i===0 ? '#f0e040' : '#7b5cff'
+            return (
+              <motion.button key={ch.id} className={s.card}
+                initial={{ opacity:0, y:26 }} animate={{ opacity:1, y:0 }}
+                transition={{ delay:.85+i*.1, ease:[.16,1,.3,1] }}
+                whileHover={{ y:-5, transition:{ duration:.22 } }}
+                whileTap={{ scale:.97 }}
+                onClick={() => onSelect(ch)}>
+                {/* Número grande decorativo */}
+                <div className={s.cardBigNum} style={{ color:`${col}09` }}>{ch.num}</div>
+                <div className={s.cardBody}>
+                  <span className={s.cardTag} style={{ color:col, borderColor:`${col}44` }}>CAP. {ch.num}</span>
+                  <div className={`${s.cardTitle} glitch`} data-g={ch.name}>{ch.name}</div>
+                  <div className={s.cardDesc}>{ch.description}</div>
+                  <div className={s.cardMeta}>
+                    📚 {ch.rounds.length} rondas · {ch.rounds[0].concepts.length} conceptos/ronda
+                  </div>
+                </div>
+                <motion.span className={s.cardArrow} style={{ color:col }}
+                  animate={{ x:[0,6,0] }} transition={{ duration:1.8, repeat:Infinity }}>→</motion.span>
+                <div className={s.cardSheen}
+                  style={{ background:`linear-gradient(135deg,${col}08,transparent)` }}/>
+              </motion.button>
+            )
+          })}
+
+          {/* Online */}
+          {onOnline && (
+            <motion.button className={`${s.card} ${s.cardOnline}`}
+              initial={{ opacity:0, y:26 }} animate={{ opacity:1, y:0 }}
+              transition={{ delay:.85+chapters.length*.1, ease:[.16,1,.3,1] }}
+              whileHover={{ y:-5 }} whileTap={{ scale:.97 }}
+              onClick={onOnline}>
+              <div className={s.cardBigNum} style={{ color:'#3dffc008', fontSize:'3rem' }}>⬡</div>
+              <div className={s.cardBody}>
+                <span className={s.cardTag} style={{ color:'#3dffc0', borderColor:'#3dffc044' }}>ONLINE</span>
+                <div className={`${s.cardTitle} glitch`} data-g="Multijugador">Multijugador</div>
+                <div className={s.cardDesc}>Cada jugador en su propio dispositivo, en tiempo real</div>
+                <div className={s.cardMeta}>📡 Tiempo real · hasta 6 jugadores</div>
+              </div>
+              <motion.span className={s.cardArrow} style={{ color:'#3dffc0' }}
+                animate={{ x:[0,6,0] }} transition={{ duration:1.8, repeat:Infinity }}>→</motion.span>
+              <div className={s.cardSheen} style={{ background:'linear-gradient(135deg,#3dffc00a,transparent)' }}/>
+              <motion.div className={s.onlinePing}
+                animate={{ scale:[1,2.8,1], opacity:[.5,0,.5] }}
+                transition={{ duration:2.2, repeat:Infinity }}/>
+            </motion.button>
+          )}
         </div>
       </div>
     </div>

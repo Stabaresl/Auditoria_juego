@@ -1,154 +1,23 @@
-.root {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 2rem 1.5rem 4rem;
-  overflow: hidden;
-}
-.bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.orb {
-  position: absolute;
-  width: 700px; height: 700px;
-  border-radius: 50%;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  transition: background 0.5s;
-}
-
-.inner {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  animation: fadeUp 0.4s ease both;
-}
-
-.outcomeCard {
-  background: rgba(15,15,26,0.96);
-  border: 2px solid;
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-}
-.outcomeEmoji { font-size: 3rem; }
-.outcomeTitle {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.6rem,6vw,2.4rem);
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-}
-.outcomeDesc {
-  font-size: 0.9rem;
-  color: #9999b5;
-  line-height: 1.5;
-}
-
-.section { display: flex; flex-direction: column; gap: 0.8rem; }
-.sectionTitle {
-  font-size: 0.7rem;
-  font-family: 'JetBrains Mono', monospace;
-  color: #9999b5;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.impostorReveal {
-  background: rgba(15,15,26,0.95);
-  border: 2px solid;
-  border-radius: 14px;
-  padding: 1rem 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.impostorAv {
-  width: 44px; height: 44px;
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 1.1rem;
-  color: #080810; flex-shrink: 0;
-}
-.impostorName {
-  flex: 1;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.04em;
-}
-
-.conceptsList { display: flex; flex-direction: column; gap: 0.6rem; }
-.conceptItem {
-  background: rgba(15,15,26,0.95);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-left: 3px solid;
-  border-radius: 12px;
-  padding: 0.9rem 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  transition: border-color 0.2s;
-}
-.conceptFake {
-  background: rgba(255,61,90,0.04);
-  border-color: rgba(255,61,90,0.2) !important;
-  border-left-color: #ff3d5a !important;
-}
-.conceptItemHeader {
-  display: flex; align-items: center; gap: 0.5rem;
-}
-.playerChip {
-  padding: 0.15rem 0.6rem;
-  border-radius: 99px;
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-.conceptItemName {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #eeeef5;
-}
-.conceptItemDef {
-  font-size: 0.78rem;
-  color: #9999b5;
-  line-height: 1.5;
-}
-
-.roundHistory { display: flex; flex-direction: column; gap: 0.5rem; }
-.roundItem {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.roundNum {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: #9999b5;
-  min-width: 60px;
-}
-.roundResult { font-size: 0.82rem; font-weight: 600; flex: 1; }
-.roundTally { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-.tallyItem {
-  font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-}
-
-.actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+.root{position:relative;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.5rem 4rem;overflow:hidden}
+.inner{position:relative;z-index:1;width:100%;max-width:560px;display:flex;flex-direction:column;gap:1.5rem}
+.outcomeCard{background:linear-gradient(160deg,#0f0f24,#08081a);border:2px solid;border-radius:20px;padding:2rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.6rem;box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06)}
+.emoji{font-size:3.2rem}
+.outcomeTitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,6vw,2.5rem);letter-spacing:.04em;line-height:1.1}
+.outcomeDesc{font-size:.9rem;color:#8888aa;line-height:1.55}
+.section{display:flex;flex-direction:column;gap:.8rem}
+.secTitle{font-size:.65rem;font-family:'JetBrains Mono',monospace;color:#8888aa;text-transform:uppercase;letter-spacing:.12em}
+.impReveal{background:rgba(255,255,255,.025);border:2px solid;border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem}
+.impAv{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#04040e;flex-shrink:0}
+.impName{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.04em;flex:1}
+.concepts{display:flex;flex-direction:column;gap:.55rem}
+.conceptItem{background:rgba(255,255,255,.025);border-left:3px solid;border-radius:12px;padding:.9rem 1rem}
+.cFake{background:rgba(255,61,90,.04);border-left-color:#ff3d5a!important}
+.conceptHdr{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+.conceptChip{font-size:.72rem;font-weight:700;padding:.18rem .5rem;border-radius:5px}
+.conceptName{font-size:.9rem;font-weight:700;color:#eeeef5;margin-bottom:.2rem}
+.conceptDef{font-size:.77rem;color:#8888aa;line-height:1.55}
+.history{display:flex;flex-direction:column;gap:.45rem}
+.hRow{display:flex;align-items:center;gap:1rem;padding:.6rem .9rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px;font-size:.8rem}
+.hRound{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#8888aa;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.hTally{display:flex;gap:.6rem;flex-wrap:wrap;margin-left:auto;font-size:.75rem;font-family:'JetBrains Mono',monospace}
+.actions{display:flex;gap:.75rem}

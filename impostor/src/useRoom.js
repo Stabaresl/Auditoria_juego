@@ -52,19 +52,26 @@ function assignRound(players, impostorId, availableReals, availableFakes, usedCo
     pickFromPool(availableFakes, usedConceptIds, 1)
   const { picked: realPicked, newPool: newReals, newUsed: finalUsed } =
     pickFromPool(availableReals, u1, players.length - 1)
-
-  const assignments = {}
-  let ri = 0
+  const assignments = {}; let ri = 0
   players.forEach(p => {
     assignments[p.id] = p.id === impostorId ? fakeConcept : realPicked[ri++]
   })
+  return { assignments, availableReals: newReals, availableFakes: newFakes, usedConceptIds: finalUsed }
+}
 
-  return {
-    assignments,
-    availableReals: newReals,
-    availableFakes: newFakes,
-    usedConceptIds: finalUsed,
-  }
+// Procesar resultado de votos y determinar ganador
+function processVotes(g, votes) {
+  const tally = {}
+  g.players.forEach(p => { tally[p.id] = 0 })
+  Object.values(votes).forEach(id => { if (tally[id] !== undefined) tally[id]++ })
+
+  const maxVotes  = Math.max(...Object.values(tally))
+  const mostVoted = Object.entries(tally)
+    .filter(([, v]) => v === maxVotes).map(([id]) => id)
+  const impostorEliminated =
+    mostVoted.length === 1 && mostVoted[0] === g.impostorId
+
+  return { tally, mostVoted, impostorEliminated }
 }
 
 export function useRoom() {
@@ -89,36 +96,31 @@ export function useRoom() {
     unsubRef.current = subscribeRoom(code, data => setRoomData(data))
   }, [])
 
-  // CREAR SALA
+  // ── CREAR SALA ────────────────────────────────────────────
   const handleCreateRoom = useCallback(async (hostName, chapterId) => {
     setLoading(true); setError('')
     try {
       const code = await createRoom(hostName, chapterId)
-      setRoomCode(code)
-      setMyPlayerId('p0')
-      setIsHost(true)
-      setMode('online')
+      setRoomCode(code); setMyPlayerId('p0'); setIsHost(true); setMode('online')
       subscribe(code)
-    } catch (e) {
+    } catch {
       setError('No se pudo crear la sala. Revisa tu conexion.')
     } finally {
       setLoading(false)
     }
   }, [subscribe])
 
-  // UNIRSE A SALA
+  // ── UNIRSE A SALA ─────────────────────────────────────────
   const handleJoinRoom = useCallback(async (code, playerName) => {
     setLoading(true); setError('')
     try {
       const result = await joinRoom(code.toUpperCase(), playerName)
       if (!result.ok) { setError(result.error); setLoading(false); return false }
-      setRoomCode(code.toUpperCase())
-      setMyPlayerId(result.playerId)
-      setIsHost(false)
-      setMode('online')
+      setRoomCode(code.toUpperCase()); setMyPlayerId(result.playerId)
+      setIsHost(false); setMode('online')
       subscribe(code.toUpperCase())
       return true
-    } catch (e) {
+    } catch {
       setError('No se pudo unir a la sala. Revisa el codigo.')
       return false
     } finally {
@@ -126,7 +128,7 @@ export function useRoom() {
     }
   }, [subscribe])
 
-  // INICIAR JUEGO (solo host)
+  // ── INICIAR JUEGO (solo host) ─────────────────────────────
   const handleStartOnlineGame = useCallback(async () => {
     if (!isHostRef.current || !roomData) return
     const players = Object.values(roomData.players ?? {})
@@ -139,137 +141,120 @@ export function useRoom() {
     const result = assignRound(players, impostorId, availableReals, availableFakes, usedConceptIds)
 
     await pushGameState(roomCodeRef.current, {
-      screen:         'secret',
-      chapter,
-      players,
-      impostorId,
-      assignments:    result.assignments,
+      screen: 'secret', chapter, players, impostorId,
+      assignments: result.assignments,
       availableReals: result.availableReals,
       availableFakes: result.availableFakes,
       usedConceptIds: result.usedConceptIds,
-      round:          0,
-      totalRounds:    3,
-      votes:          {},
-      history:        [],
-      viewedBy:       [],
+      round: 0, totalRounds: 3, votes: {}, history: [], viewedBy: [],
     })
   }, [roomData])
 
-  // CONFIRMAR QUE VI MI TARJETA (cualquier jugador)
-  // Cada jugador llama esto al pulsar continuar en SecretScreen.
-  // Cuando todos han confirmado, el host avanza a 'discuss'.
+  // ── CONFIRMAR TARJETA VISTA (cualquier jugador) ───────────
+  // Cuando todos confirman, cualquiera puede avanzar a 'discuss'
   const handleViewerDone = useCallback(async (myId) => {
     if (!roomData?.game) return
     const g = roomData.game
-
     const viewedBy = Array.isArray(g.viewedBy) ? g.viewedBy : []
     if (viewedBy.includes(myId)) return
 
     const newViewedBy = [...viewedBy, myId]
     const allSeen = g.players.every(p => newViewedBy.includes(p.id))
 
-    // Cualquier jugador puede escribir el avance cuando todos terminaron.
-    // No se limita al host para evitar que se quede bloqueado si el ultimo
-    // en confirmar no es el host.
     if (allSeen) {
-      await pushGameState(roomCodeRef.current, {
-        ...g, screen: 'discuss', viewedBy: [],
-      })
+      await pushGameState(roomCodeRef.current, { ...g, screen: 'discuss', viewedBy: [], debateStarted: false })
     } else {
       await pushGameState(roomCodeRef.current, { ...g, viewedBy: newViewedBy })
     }
   }, [roomData])
 
-  // IR A VOTACION (solo host)
+  // ── ARRANCAR TIMER (solo host) ──────────────────────────
+  const handleStartDebate = useCallback(async () => {
+    if (!isHostRef.current || !roomData?.game) return
+    await pushGameState(roomCodeRef.current, { ...roomData.game, debateStarted: true })
+  }, [roomData])
+
+  // ── INICIAR DEBATE (solo host) ────────────────────────────
   const handleGoVote = useCallback(async () => {
     if (!isHostRef.current || !roomData?.game) return
-    await pushGameState(roomCodeRef.current, {
-      ...roomData.game, screen: 'vote', votes: {},
-    })
+    await pushGameState(roomCodeRef.current, { ...roomData.game, screen: 'vote', votes: {} })
   }, [roomData])
 
-  // PROCESAR VOTOS (solo host calcula resultado)
-  const handleVoteSubmit = useCallback(async (votes) => {
-    if (!isHostRef.current || !roomData?.game) return
+  // ── VOTO INDIVIDUAL (cualquier jugador) ───────────────────
+  // Cada jugador registra su voto. Cuando todos votaron, el host
+  // calcula el resultado y avanza a 'result'.
+  const handleSingleVote = useCallback(async (voterId, targetId) => {
+    if (!roomData?.game) return
     const g = roomData.game
 
-    const tally = {}
-    g.players.forEach(p => { tally[p.id] = 0 })
-    Object.values(votes).forEach(id => { if (tally[id] !== undefined) tally[id]++ })
+    const currentVotes = g.votes ?? {}
+    if (currentVotes[voterId] !== undefined && currentVotes[voterId] !== null) return
 
-    const maxVotes  = Math.max(...Object.values(tally))
-    const mostVoted = Object.entries(tally)
-      .filter(([, v]) => v === maxVotes).map(([id]) => id)
-    const impostorEliminated =
-      mostVoted.length === 1 && mostVoted[0] === g.impostorId
+    const newVotes = { ...currentVotes, [voterId]: targetId }
+    const allVoted = g.players.every(p => newVotes[p.id] !== undefined && newVotes[p.id] !== null)
 
-    const newRound   = g.round + 1
-    const newHistory = [
-      ...(g.history ?? []),
-      { round: g.round, tally, impostorEliminated, mostVoted },
-    ]
+    if (allVoted) {
+      // Calcular resultado y avanzar — cualquier jugador puede escribirlo
+      const { tally, mostVoted, impostorEliminated } = processVotes(g, newVotes)
+      const newRound   = g.round + 1
+      const newHistory = [
+        ...(g.history ?? []),
+        { round: g.round, tally, impostorEliminated, mostVoted },
+      ]
 
-    if (impostorEliminated) {
+      if (impostorEliminated) {
+        await pushGameState(roomCodeRef.current, {
+          ...g, screen: 'result', votes: newVotes, history: newHistory, outcome: 'players_win',
+        })
+        return
+      }
+      if (newRound >= g.totalRounds) {
+        await pushGameState(roomCodeRef.current, {
+          ...g, screen: 'result', votes: newVotes, history: newHistory, outcome: 'impostor_wins',
+        })
+        return
+      }
+      // Siguiente ronda
+      const result = assignRound(g.players, g.impostorId, g.availableReals, g.availableFakes, g.usedConceptIds)
       await pushGameState(roomCodeRef.current, {
-        ...g, screen: 'result', votes, history: newHistory, outcome: 'players_win',
+        ...g,
+        screen: 'secret', round: newRound,
+        assignments: result.assignments,
+        availableReals: result.availableReals,
+        availableFakes: result.availableFakes,
+        usedConceptIds: result.usedConceptIds,
+        votes: {}, history: newHistory, viewedBy: [],
       })
-      return
-    }
-    if (newRound >= g.totalRounds) {
-      await pushGameState(roomCodeRef.current, {
-        ...g, screen: 'result', votes, history: newHistory, outcome: 'impostor_wins',
-      })
-      return
-    }
-
-    const result = assignRound(
-      g.players, g.impostorId,
-      g.availableReals, g.availableFakes, g.usedConceptIds,
-    )
-    await pushGameState(roomCodeRef.current, {
-      ...g,
-      screen:         'secret',
-      round:          newRound,
-      assignments:    result.assignments,
-      availableReals: result.availableReals,
-      availableFakes: result.availableFakes,
-      usedConceptIds: result.usedConceptIds,
-      votes:          {},
-      history:        newHistory,
-      viewedBy:       [],
-    })
-  }, [roomData])
-
-  // VER GLOSARIO (solo host)
-  const handleSeeGlossary = useCallback(async () => {
-    if (!isHostRef.current || !roomData?.game) return
-    await pushGameState(roomCodeRef.current, {
-      ...roomData.game, screen: 'glossary',
-    })
-  }, [roomData])
-
-  // REINICIAR O SALIR
-  const handleRestart = useCallback(async () => {
-    if (isHostRef.current) {
-      await deleteRoom(roomCodeRef.current)
     } else {
-      await leaveRoom(roomCodeRef.current, myPlayerId)
+      // Solo registrar mi voto
+      await pushGameState(roomCodeRef.current, { ...g, votes: newVotes })
     }
+  }, [roomData])
+
+  // ── VER GLOSARIO (solo host) ──────────────────────────────
+  const handleSeeGlossary = useCallback(async () => {
+    if (!roomData?.game) return
+    await pushGameState(roomCodeRef.current, { ...roomData.game, screen: 'glossary' })
+  }, [roomData])
+
+  // ── REINICIAR / SALIR ─────────────────────────────────────
+  const handleRestart = useCallback(async () => {
+    if (isHostRef.current) await deleteRoom(roomCodeRef.current)
+    else await leaveRoom(roomCodeRef.current, myPlayerId)
     unsubRef.current?.()
     setMode('idle'); setRoomCode(''); setMyPlayerId(null)
     setIsHost(false); setRoomData(null); setError('')
   }, [myPlayerId])
 
+  // ── Derivados ─────────────────────────────────────────────
   const game    = roomData?.game ?? null
   const players = roomData
-    ? Object.values(roomData.players ?? {})
-        .map(p => ({ ...p, color: PLAYER_COLORS[p.colorIdx] }))
+    ? Object.values(roomData.players ?? {}).map(p => ({ ...p, color: PLAYER_COLORS[p.colorIdx] }))
     : []
 
   const viewedCount = Array.isArray(game?.viewedBy) ? game.viewedBy.length : 0
   const iHaveViewed = myPlayerId && Array.isArray(game?.viewedBy)
-    ? game.viewedBy.includes(myPlayerId)
-    : false
+    ? game.viewedBy.includes(myPlayerId) : false
 
   return {
     mode, roomCode, myPlayerId, isHost,
@@ -279,8 +264,9 @@ export function useRoom() {
     handleJoinRoom,
     handleStartOnlineGame,
     handleViewerDone,
+    handleStartDebate,
     handleGoVote,
-    handleVoteSubmit,
+    handleSingleVote,
     handleSeeGlossary,
     handleRestart,
     setError,
