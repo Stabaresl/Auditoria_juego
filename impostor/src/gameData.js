@@ -1,7 +1,15 @@
 // ═══════════════════════════════════════════════════════
 //  DATOS DEL JUEGO — El Concepto Infiltrado
-//  Basado en: Valencia et al. (2016) & Libro Auditoría TI
-//  v2.0 — Banco expandido con nombres completos
+//  Basado en: Valencia, Marulanda y López (2016)
+//  "Aseguramiento y auditoría de TI orientados a riesgos"
+//  v3.0 — Banco revisado y validado contra el texto fuente
+// ═══════════════════════════════════════════════════════
+//
+//  CRITERIOS DE REVISIÓN:
+//  ✅ Definiciones extraídas o parafraseadas del libro
+//  ✅ Conceptos FALSOS: plausibles, técnicos, difíciles de detectar
+//  ✅ Conceptos REALES: completos, sin pistas que delaten al falso
+//  ✅ Al menos 1 falso por ronda (puede haber 2 en rondas grandes)
 // ═══════════════════════════════════════════════════════
 
 export const CHAPTERS = [
@@ -22,39 +30,39 @@ export const CHAPTERS = [
         topic: 'La Tríada del Aseguramiento',
         concepts: [
           {
+            id: 'aseguramiento',
+            name: 'Aseguramiento',
+            definition: 'Función organizacional diseñada para mejorar el grado de confianza que se tiene sobre un asunto en particular. Según el Instituto de Auditores Internos (IAA), es aquella función que provee aseguramiento sobre la efectividad del gobierno, administración de riesgos y control.',
+            fake: false,
+          },
+          {
             id: 'riesgo',
             name: 'Riesgo',
-            definition: 'Término asociado a la incertidumbre sobre un aspecto específico. Como sistema de gestión, utiliza técnicas para identificar, analizar, valorar, mitigar y monitorear eventos negativos o positivos que pueden impactar los objetivos organizacionales.',
+            definition: 'Término asociado a la incertidumbre sobre un aspecto específico. Como sistema de gestión, utiliza técnicas para identificar, analizar, valorar, definir medidas de mitigación, comunicar y monitorear los diferentes eventos negativos o positivos que pueden impactar en el cumplimiento de los objetivos de una organización dentro de un contexto específico.',
             fake: false,
           },
           {
             id: 'control',
             name: 'Control',
-            definition: 'Disciplina independiente dentro de la tríada del aseguramiento. Comprende las medidas, políticas y procedimientos que una organización implementa para mitigar riesgos y garantizar el cumplimiento de sus objetivos.',
+            definition: 'Segunda disciplina interdependiente dentro de la tríada del aseguramiento. Comprende las medidas, políticas y procedimientos que una organización implementa para mitigar los riesgos identificados y garantizar el cumplimiento de sus objetivos estratégicos y operativos.',
             fake: false,
           },
           {
             id: 'auditoria',
             name: 'Auditoría',
-            definition: 'Tercera disciplina de la tríada del aseguramiento. Función independiente y objetiva que recolecta y evalúa evidencia para determinar si los controles funcionan eficazmente para mitigar los riesgos identificados.',
-            fake: false,
-          },
-          {
-            id: 'aseguramiento',
-            name: 'Aseguramiento',
-            definition: 'Función organizacional diseñada para mejorar el grado de confianza que se tiene sobre un asunto particular. Según el IAA, provee aseguramiento sobre la efectividad del gobierno, administración de riesgos y control.',
+            definition: 'Tercera disciplina de la tríada del aseguramiento. Función independiente y objetiva que recolecta y evalúa evidencia suficiente y pertinente para determinar si los controles que mitigan los riesgos identificados funcionan de manera eficaz y eficiente.',
             fake: false,
           },
           {
             id: 'gobierno-corporativo',
             name: 'Gobierno Corporativo',
-            definition: 'Sistema a través del cual las empresas son dirigidas y controladas para lograr los objetivos previstos. Es uno de los conceptos centrales del marco GRC según el OCEG.',
+            definition: 'Sistema a través del cual las empresas son dirigidas y controladas para lograr los objetivos previstos. Es uno de los tres conceptos centrales del marco GRC según el OCEG, junto con la gestión de riesgos y el cumplimiento normativo.',
             fake: false,
           },
           {
-            id: 'supervision-integral',
-            name: 'Supervisión Integral Continua (SIC)',
-            definition: 'Proceso dinámico y permanente mediante el cual la alta gerencia valida en tiempo real que los tres elementos de la tríada —riesgo, control y auditoría— operen de forma sincronizada y sin brechas.',
+            id: 'aseguramiento-pleno',
+            name: 'Aseguramiento Pleno (Full Assurance)',
+            definition: 'Nivel superior del modelo de madurez del aseguramiento definido por el IIA Global en 2013, en el que las tres disciplinas —riesgo, control y auditoría— operan con procesos integrados, métricas compartidas y reporte unificado ante el consejo directivo, eliminando toda duplicación de esfuerzos.',
             fake: true,
           },
         ],
@@ -68,37 +76,43 @@ export const CHAPTERS = [
           {
             id: 'grc-marco',
             name: 'Gobierno, Riesgo y Cumplimiento (GRC)',
-            definition: 'Marco de referencia emitido en 2008 por el OCEG (Open Compliance and Ethics Group) que integra conceptualmente el gobierno corporativo, la gestión de riesgos y las funciones de cumplimiento para unificar criterios y coordinar esfuerzos.',
+            definition: 'Marco de referencia emitido en 2008 por el OCEG (Open Compliance and Ethics Group) que integra conceptualmente el gobierno corporativo, la gestión de riesgos y las funciones de cumplimiento. Promueve la unificación de criterios, la coordinación de esfuerzos y la colaboración entre los responsables de la dirección organizacional.',
             fake: false,
           },
           {
             id: 'cumplimiento',
             name: 'Cumplimiento',
-            definition: 'Compromisos internos y externos —generalmente obligatorios— que debe cumplir una organización en el desarrollo de su misión. Incluye requerimientos regulatorios, políticas internas, acuerdos con proveedores y normas sectoriales.',
+            definition: 'Todos los compromisos internos y externos —por lo general obligatorios— que debe cumplir una organización en el desarrollo de su misión. Estos compromisos pueden estar asociados a requerimientos regulatorios, políticas internas y externas, acuerdos con proveedores, entre otros.',
             fake: false,
           },
           {
             id: 'it-grc',
             name: 'Gobierno, Riesgo y Cumplimiento de TI (IT GRC)',
-            definition: 'Subconjunto del GRC corporativo compuesto por tres cuerpos de conocimiento integrados: gobierno de TIC, riesgos de TIC y cumplimiento regulatorio y normativo de TIC.',
+            definition: 'Subconjunto del GRC corporativo compuesto por tres cuerpos de conocimiento integrados: el gobierno de TIC (IT governance), los riesgos de TIC (IT risk) y el cumplimiento regulatorio y normativo de TIC (IT compliance), que actúan de forma integrada.',
             fake: false,
           },
           {
             id: 'oceg',
             name: 'Grupo Abierto de Cumplimiento y Ética (OCEG)',
-            definition: 'Open Compliance and Ethics Group. Organización que emitió el marco GRC en 2008. Promueve la unificación de criterios, la coordinación de esfuerzos y la colaboración entre los responsables de la dirección organizacional.',
+            definition: 'Open Compliance and Ethics Group. Organización que emitió el marco GRC en 2008, a través del cual se promueve la unificación de criterios, la coordinación de esfuerzos y la colaboración entre los responsables de la dirección de la organización, mediante la integración de los órganos responsables del gobierno, administración de riesgos, control interno y cumplimiento.',
             fake: false,
           },
           {
             id: 'gobierno-tic',
             name: 'Gobierno Corporativo de TIC',
-            definition: 'Definido por el ITGI (IT Governance Institute) como responsabilidad del comité de dirección y los ejecutivos. Consiste en el liderazgo, estructura y procesos que aseguran que las TIC sostengan y extiendan la estrategia organizacional.',
+            definition: 'Definido por el ITGI (IT Governance Institute) como responsabilidad del comité de dirección y de los ejecutivos. Es una parte integral del gobierno de la organización y consiste en el liderazgo, la estructura y los procesos organizativos que aseguran que las TIC sostengan y extiendan la estrategia y los objetivos de la organización.',
             fake: false,
           },
           {
-            id: 'grc-360',
-            name: 'Marco de Cumplimiento Circular (GRC-360°)',
-            definition: 'Extensión propietaria del GRC publicada por el OCEG en 2015 que incorpora un ciclo de retroalimentación continua entre gobierno, riesgo y cumplimiento para adaptarse a entornos regulatorios cambiantes.',
+            id: 'cumplimiento-tic',
+            name: 'Cumplimiento Normativo y Regulatorio de TIC',
+            definition: 'Equivale a las diferentes normas y regulaciones, tanto internas como externas, que debe cumplir el área de tecnologías de información. Incluye regulaciones como la ley de habeas data, leyes de derechos de autor, ley de propiedad de datos y normas específicas como ISO/IEC 20000, ISO/IEC 27001, ISO/IEC 12207 e ISO/IEC 29110.',
+            fake: false,
+          },
+          {
+            id: 'grc-wheel',
+            name: 'Marco de Cumplimiento Circular GRC (GRC Wheel)',
+            definition: 'Extensión del modelo GRC publicada por el OCEG en 2011 que organiza los procesos de gobierno, riesgo y cumplimiento en un ciclo de cuatro fases —Lograr, Evaluar, Prevenir y Promover— para que las organizaciones alcancen de forma dinámica sus objetivos con integridad.',
             fake: true,
           },
         ],
@@ -112,37 +126,37 @@ export const CHAPTERS = [
           {
             id: '3lod',
             name: 'Modelo de Tres Líneas de Defensa (3LoD)',
-            definition: 'Modelo establecido por el IIA Global en 2013 mediante una declaración de posición. Establece roles específicos alrededor de riesgo, control y auditoría para los diferentes grupos de interés relacionados con el aseguramiento organizacional.',
+            definition: 'Modelo establecido por el IIA Global en 2013 mediante una "declaración de posición", con el fin de establecer roles específicos alrededor de los temas de riesgo, control y auditoría, y coordinar las acciones llevadas a cabo por los diferentes grupos de interés relacionados con el aseguramiento organizacional.',
             fake: false,
           },
           {
             id: 'primera-linea',
             name: 'Primera Línea de Defensa',
-            definition: 'Asumida por la gerencia en sus diferentes niveles (gerencia general y gerencias operativas), así como la función de control interno. Es la línea que gestiona los riesgos en el día a día de la operación.',
+            definition: 'Asumida por la gerencia en sus diferentes niveles (gerencia general y gerencias operativas), así como la función de control interno, ya sea que se encuentre de manera explícita o implícita como parte de un modelo de control interno. Gestiona los riesgos en el día a día de la operación.',
             fake: false,
           },
           {
             id: 'segunda-linea',
             name: 'Segunda Línea de Defensa',
-            definition: 'Conformada por las áreas especializadas que ejercen diferentes funciones de control y aseguramiento en la organización: controles financieros, seguridad, gestión de riesgos, calidad, inspección y cumplimiento.',
+            definition: 'Conformada por las áreas especializadas que ejercen diferentes funciones de control y aseguramiento en la organización: controles financieros, seguridad, gestión de riesgos, calidad, inspección y cumplimiento. En el contexto TIC, corresponde a los controles ejercidos por áreas especializadas, responsables de protección de datos, áreas de cumplimiento tecnológico y funciones de seguridad de la información.',
             fake: false,
           },
           {
             id: 'tercera-linea',
             name: 'Tercera Línea de Defensa',
-            definition: 'La auditoría interna. Actúa de forma independiente y objetiva, en concordancia con las normas internacionales de auditoría interna, y reporta a los diferentes organismos de gobierno corporativo.',
+            definition: 'La auditoría interna. Actúa de forma independiente y objetiva, en concordancia con las normas internacionales de auditoría interna, y reporta a los diferentes organismos de gobierno corporativo. En el contexto TIC, corresponde a la auditoría de tecnologías de información.',
             fake: false,
           },
           {
             id: 'cuarta-linea',
-            name: 'Cuarta Línea de Defensa (organismos externos)',
-            definition: 'Considerada por algunos autores como la cuarta línea. Corresponde a funciones externas de control ejercidas por organismos públicos como contralorías o entes sectoriales, y por organizaciones privadas que realizan revisoría fiscal o auditoría de tercera parte.',
+            name: 'Cuarta Línea de Defensa (Organismos Externos)',
+            definition: 'Considerada por algunos autores como una extensión del modelo. Corresponde a las funciones externas de control ejercidas por organismos públicos como las contralorías o los organismos sectoriales de control, y por organizaciones privadas que desarrollan funciones de revisoría fiscal o auditoría de tercera parte.',
             fake: false,
           },
           {
             id: 'linea-cero',
             name: 'Línea Cero de Defensa (L0D)',
-            definition: 'Concepto propuesto por el IIA en 2021 que reconoce a los usuarios finales y ciudadanos como primera barrera de detección de fraudes y anomalías, situados antes de la gerencia en el modelo de defensa organizacional.',
+            definition: 'Concepto propuesto por el IIA en su actualización del modelo 3LoD en 2020, que reconoce a los usuarios finales y ciudadanos como primera barrera informal de detección de fraudes y anomalías operativas, situados antes de la gerencia en el esquema de aseguramiento organizacional.',
             fake: true,
           },
         ],
@@ -156,19 +170,31 @@ export const CHAPTERS = [
           {
             id: 'aseg-combinado',
             name: 'Aseguramiento Combinado',
-            definition: 'Alternativa para integrar la información de aseguramiento de diferentes actores internos y externos, evitando que la alta gerencia reciba reportes fragmentados y minimizando la duplicación de esfuerzos.',
+            definition: 'Alternativa para disminuir el problema de fragmentación de informes y aportar a la integración de la información de aseguramiento, pues la alta gerencia y los diferentes órganos de gobierno reciben de forma aislada diversos informes de los diferentes actores internos y externos, lo que puede generar un desgaste y frustración al no poder visualizar de forma integrada el estado actual del aseguramiento.',
             fake: false,
           },
           {
             id: 'mapa-aseguramiento',
             name: 'Mapa de Aseguramiento',
-            definition: 'Herramienta diseñada para establecer una adecuada coordinación de los diferentes actores internos y externos relacionados con la función de aseguramiento, minimizando duplicación de esfuerzos y garantizando cobertura adecuada.',
+            definition: 'Herramienta diseñada con el fin de establecer una adecuada coordinación de los diferentes actores internos y externos relacionados con la función de aseguramiento en una organización, y de esta forma minimizar la duplicación de esfuerzos y dar una cobertura adecuada a las diferentes tareas relacionadas con el riesgo, el control y la auditoría.',
+            fake: false,
+          },
+          {
+            id: 'iia-2050',
+            name: 'Estándar de Coordinación IIA 2050',
+            definition: 'Estándar de auditoría internacional del IIA relacionado con la coordinación. Establece que el director ejecutivo de auditoría debe compartir información y coordinar actividades con otros proveedores internos y externos de aseguramiento y de servicios de consultoría relevantes para asegurar una cobertura adecuada y minimizar la duplicidad de esfuerzos.',
+            fake: false,
+          },
+          {
+            id: 'cbok-voice',
+            name: 'Documento CBOK "Una voz, una visión" (Combined Assurance)',
+            definition: 'Documento del Common Body of Knowledge del IIA Global titulado "Combined assurance: One language, one voice, one view", que planteó el aseguramiento combinado como alternativa para resolver el problema de alineamiento e integración de las diferentes funciones y organismos de aseguramiento de una organización.',
             fake: false,
           },
           {
             id: 'auditoria-integrada',
             name: 'Auditorías Integradas',
-            definition: 'Forma de coordinar el aseguramiento combinado que se logra a través del desarrollo de auditorías conjuntas con funciones de soporte (por ejemplo, de calidad) o auditores externos.',
+            definition: 'Una de las formas de coordinar el aseguramiento combinado propuestas por Huibers (2015). Se logra a través del desarrollo de auditorías conjuntas con funciones de soporte (por ejemplo, de calidad) o auditores externos.',
             fake: false,
           },
           {
@@ -178,21 +204,27 @@ export const CHAPTERS = [
             fake: false,
           },
           {
-            id: 'iia-2050',
-            name: 'Estándar de Coordinación IIA 2050',
-            definition: 'Consejo para la práctica del IIA relacionado con la coordinación. Establece que el director ejecutivo de auditoría debe compartir información y coordinar actividades con otros proveedores internos y externos de aseguramiento.',
+            id: 'integracion-procesos',
+            name: 'Integración de Procesos',
+            definition: 'Forma de coordinar el aseguramiento combinado mediante la presentación de reportes conjuntos entre diferentes actores alrededor de un proceso de control específico o utilizando los esquemas de auditoría orientada a riesgos, donde un riesgo es evaluado por diferentes actores (por ejemplo, auditorías financieras y revisoría fiscal).',
             fake: false,
           },
           {
-            id: 'cbok-voice',
-            name: 'Documento CBOK "Una voz, una visión" (Combined Assurance)',
-            definition: 'Documento del Common Body of Knowledge del IIA Global titulado Combined assurance: One language, one voice, one view, que plantea el aseguramiento combinado como solución al problema de alineamiento e integración de funciones de aseguramiento.',
+            id: 'alineacion-actividades',
+            name: 'Alineación a través de Actividades',
+            definition: 'Forma de coordinar el aseguramiento combinado de manera estructurada o ad hoc; por ejemplo, al momento de llevar a cabo auditorías se puede revisar el estado de la actualización de riesgos, o las acciones que han sido recomendadas por otros actores del aseguramiento como contralorías o revisoría fiscal.',
+            fake: false,
+          },
+          {
+            id: 'consejo-2050-2',
+            name: 'Consejo para la Práctica 2050-2 del IIA',
+            definition: 'Orientado a establecer mapas de aseguramiento. Considera la existencia de tres clases de proveedores de servicios de aseguramiento: los que informan a la alta dirección o son parte de ella, los que informan al consejo (incluida la auditoría interna) y los que informan a las personas interesadas externas.',
             fake: false,
           },
           {
             id: 'pad-dual',
             name: 'Protocolo de Aseguramiento Dual (PAD)',
-            definition: 'Mecanismo propuesto por Huibers (2017) que combina auditoría interna y externa para validar controles de forma simultánea y vinculante, reduciendo el tiempo de cobertura en un 40% según estudios del IIA.',
+            definition: 'Mecanismo propuesto por el IIA en 2016 que formaliza la coordinación simultánea entre auditoría interna y revisoría fiscal para la evaluación conjunta de controles clave, evitando la duplicidad de pruebas sustantivas y reduciendo el tiempo total de ejecución en un ciclo de aseguramiento.',
             fake: true,
           },
         ],
@@ -205,7 +237,7 @@ export const CHAPTERS = [
         concepts: [
           {
             id: 'cro',
-            name: 'Director de Riesgos Organizacional (CRO)',
+            name: 'Director de Riesgos Organizacional (CRO / CRMO)',
             definition: 'Chief Risk Officer o Chief Risk Management Officer. Perfil a nivel organizacional responsable de la disciplina de riesgos dentro del aseguramiento corporativo.',
             fake: false,
           },
@@ -217,7 +249,7 @@ export const CHAPTERS = [
           },
           {
             id: 'cao',
-            name: 'Director Ejecutivo de Auditoría (CAO/CAE)',
+            name: 'Director Ejecutivo de Auditoría (CAO / CAE)',
             definition: 'Chief Audit Officer o Chief Audit Executive. Perfil a nivel organizacional responsable de la disciplina de auditoría dentro del aseguramiento corporativo.',
             fake: false,
           },
@@ -234,9 +266,15 @@ export const CHAPTERS = [
             fake: false,
           },
           {
-            id: 'ciao',
-            name: 'Director de Auditoría e Innovación (CIAO)',
-            definition: 'Chief Innovation and Audit Officer. Perfil emergente definido por el IIA en 2022 que combina las responsabilidades del CAE con la supervisión de iniciativas de transformación digital dentro del aseguramiento corporativo.',
+            id: 'cisa-perfil',
+            name: 'Auditor de Sistemas de Información (CISA)',
+            definition: 'Chief Information System Auditor. Perfil a nivel tecnológico responsable de la disciplina de auditoría dentro del aseguramiento tecnológico. La sigla CISA se refiere con mayor frecuencia a Certified Information System Auditor, certificación internacional de ISACA.',
+            fake: false,
+          },
+          {
+            id: 'ciao-falso',
+            name: 'Director de Aseguramiento e Innovación (CIAO)',
+            definition: 'Chief Innovation and Assurance Officer. Perfil emergente definido por el IIA en colaboración con el OCEG en 2019, que fusiona las responsabilidades del CAE con el liderazgo de iniciativas de transformación digital y gestión de riesgos emergentes en organizaciones de alta madurez tecnológica.',
             fake: true,
           },
         ],
@@ -250,37 +288,43 @@ export const CHAPTERS = [
           {
             id: 'control-interno-tec',
             name: 'Control Interno Tecnológico (Control Interno Informático)',
-            definition: 'Sistema de control cuyo objetivo es verificar diariamente que todas las actividades de los sistemas de información sean realizadas cumpliendo los procedimientos, estándares y normas fijadas por la organización. El modelo más representativo es COBIT.',
+            definition: 'Sistema de control cuyo objetivo es verificar diariamente que todas las actividades de los sistemas de información sean realizadas cumpliendo los procedimientos, estándares y normas fijadas por la organización o el área informática (Piattini y Del Peso, 1998). El modelo más representativo a nivel mundial es COBIT (Control Objectives for Information and Related Technologies).',
             fake: false,
           },
           {
             id: 'sgsi',
             name: 'Sistema de Gestión de Seguridad de la Información (SGSI / ISO 27001)',
-            definition: 'Norma ISO/IEC 27001 que establece un sistema de gestión de seguridad de la información. Preserva la confidencialidad, integridad y disponibilidad mediante la aplicación de un proceso de gestión del riesgo.',
+            definition: 'La norma ISO/IEC 27001 establece un sistema de gestión de seguridad de la información que hace parte de los procesos y de la estructura de gestión total de la información de la organización. A través de este sistema se preserva la confidencialidad, la integridad y la disponibilidad de la información mediante la aplicación de un proceso de gestión del riesgo.',
             fake: false,
           },
           {
             id: 'seg-informatica',
             name: 'Seguridad Informática',
-            definition: 'Conjunto de procedimientos, dispositivos y herramientas encargadas de asegurar la integridad, disponibilidad y privacidad de la información en un sistema informático, intentando reducir las amenazas que pueden afectarlo (García, Hurtado y Alegre, 2011).',
+            definition: 'Conjunto de procedimientos, dispositivos y herramientas encargadas de asegurar la integridad, disponibilidad y privacidad de la información en un sistema informático e intenta reducir las amenazas que pueden afectar el mismo (García, Hurtado y Alegre, 2011). A diferencia del SGSI, se centra en los activos tecnológicos más que en la información como concepto.',
             fake: false,
           },
           {
             id: 'comp-forense',
             name: 'Computación Forense',
-            definition: 'Disciplina de las ciencias forenses que procura descubrir e interpretar la información en medios informáticos para establecer los hechos y formular hipótesis relacionadas con el caso, utilizando métodos científicos para preservar, recolectar y presentar evidencias digitales (Cano, 2009).',
+            definition: 'Disciplina de las ciencias forenses que, considerando las tareas propias asociadas con la evidencia, procura descubrir e interpretar la información en los medios informáticos para establecer los hechos y formular las hipótesis relacionadas con el caso (Cano, 2009). Utiliza métodos científicos para preservar, recolectar, validar, identificar, analizar, interpretar, documentar y presentar evidencias digitales.',
             fake: false,
           },
           {
             id: 'auditoria-sistemas',
             name: 'Auditoría de Sistemas (IT Assurance)',
-            definition: 'Función de aseguramiento a través de la cual se recolecta y evalúa evidencia suficiente y pertinente para determinar si los controles que mitigan los riesgos de TIC son eficaces y eficientes para proteger el cumplimiento de los objetivos organizacionales.',
+            definition: 'Función de aseguramiento a través de la cual se recolecta y evalúa evidencia suficiente y pertinente con el fin de determinar si los controles que mitigan los diferentes riesgos asociados a las tecnologías de información y comunicaciones son eficaces y eficientes para proteger adecuadamente el cumplimiento de los objetivos y metas organizacionales.',
             fake: false,
           },
           {
-            id: 'auditoria-predictiva',
-            name: 'Auditoría Predictiva Algorítmica (APA)',
-            definition: 'Campo emergente que utiliza modelos de inteligencia artificial para anticipar hallazgos de auditoría antes de ejecutar las pruebas sustantivas, reduciendo hasta un 60% el tiempo de planificación según el marco ISO 19011:2022.',
+            id: 'gestion-riesgos-tic',
+            name: 'Gestión de Riesgos de TIC',
+            definition: 'Proceso mediante el cual se identifican, analizan, evalúan y definen los planes de tratamiento de todos aquellos eventos adversos (amenazas) que pueden llegar a impactar los recursos tecnológicos o la información de una organización. Es una de las funciones esenciales del gobierno de tecnologías de información según Saleh y Alfantookh (2011).',
+            fake: false,
+          },
+          {
+            id: 'auditoria-continua-falso',
+            name: 'Auditoría Continua Automatizada (ACA)',
+            definition: 'Campo emergente del aseguramiento tecnológico que usa agentes de software integrados en los sistemas transaccionales para ejecutar pruebas de cumplimiento en tiempo real y emitir alertas automáticas al director ejecutivo de auditoría, reduciendo el ciclo tradicional de planeación-ejecución-reporte a un modelo de monitoreo perpetuo.',
             fake: true,
           },
         ],
@@ -293,38 +337,94 @@ export const CHAPTERS = [
         concepts: [
           {
             id: 'parte-responsable',
-            name: 'Parte Responsable (Componente 1 de la Iniciativa de Aseguramiento)',
+            name: 'Parte Responsable (Componente 1)',
             definition: 'Primer componente de una iniciativa de aseguramiento TIC según COBIT 5. Es la entidad o área auditada que gobierna y gestiona el asunto sobre el que se va a proporcionar aseguramiento.',
             fake: false,
           },
           {
             id: 'asunto-auditoria',
-            name: 'El Asunto (Componente 2 de la Iniciativa de Aseguramiento)',
-            definition: 'Segundo componente. Equivale al objeto de análisis de la auditoría: puede incluir infraestructura tecnológica, aplicaciones de negocio y prácticas de gobierno y gestión de tecnologías de información.',
+            name: 'El Asunto (Componente 2)',
+            definition: 'Segundo componente de la iniciativa de aseguramiento. Equivale al objeto de análisis de la auditoría, el cual puede incluir la infraestructura tecnológica, las aplicaciones de negocio y las prácticas de gobierno y gestión de tecnologías de información.',
             fake: false,
           },
           {
             id: 'criterios-adecuados',
-            name: 'Criterios Adecuados (Componente 3 de la Iniciativa de Aseguramiento)',
-            definition: 'Tercer componente. Son los parámetros contra los que se confronta la evidencia obtenida en el proceso de auditoría, basados en mejores prácticas o en las políticas, procedimientos y prácticas establecidas formalmente en la organización.',
+            name: 'Criterios Adecuados (Componente 3)',
+            definition: 'Tercer componente. Son los parámetros contra los que se confronta la evidencia obtenida en el proceso de auditoría. Están basados en mejores prácticas o en las políticas, procedimientos y prácticas establecidas formalmente en la organización que es objeto de estudio.',
             fake: false,
           },
           {
             id: 'ejecucion-auditoria',
-            name: 'Ejecución de la Auditoría (Componente 4 de la Iniciativa de Aseguramiento)',
+            name: 'Ejecución de la Auditoría (Componente 4)',
             definition: 'Cuarto componente. Incorpora las pruebas sustantivas y de cumplimiento necesarias para evaluar el nivel de conformidad de los criterios de auditoría establecidos previamente.',
             fake: false,
           },
           {
             id: 'conclusion-auditoria',
-            name: 'Conclusión de la Auditoría (Componente 5 de la Iniciativa de Aseguramiento)',
+            name: 'Conclusión de la Auditoría (Componente 5)',
             definition: 'Quinto y último componente. Se realiza formalmente a través de una comunicación que contiene los hallazgos y recomendaciones que se hacen a partir del análisis proporcionado por la evidencia obtenida.',
             fake: false,
           },
           {
-            id: 'matriz-impacto',
-            name: 'Matriz de Impacto Cruzado (Componente 6 de la Iniciativa de Aseguramiento)',
-            definition: 'Componente adicional de la guía COBIT 5 para aseguramiento que vincula cada hallazgo con un proceso APO/BAI/DSS específico, permitiendo priorizar automáticamente las recomendaciones según su impacto en la cadena de valor de TIC.',
+            id: 'usuario-secundario',
+            name: 'El Usuario (Parte Secundaria en el Modelo)',
+            definition: 'En el modelo de iniciativa de aseguramiento de COBIT 5, el usuario es la instancia secundaria que requiere la auditoría y a la cual, por lo general, se le notifica el informe. Se diferencia de la parte responsable, que es el área auditada, y del profesional de aseguramiento, que ejecuta el proceso.',
+            fake: false,
+          },
+          {
+            id: 'alcance-dinamico-falso',
+            name: 'Alcance Dinámico de la Iniciativa (Componente Transversal)',
+            definition: 'Componente transversal de la guía COBIT 5 para aseguramiento que permite al profesional de auditoría ampliar o reducir el alcance de la iniciativa durante la ejecución, en función de los hallazgos preliminares, sin necesidad de replantear los criterios adecuados ya establecidos.',
+            fake: true,
+          },
+        ],
+      },
+
+      // ── Ronda 8 ─────────────────────────────────────
+      {
+        id: 'r1-vision-integrada',
+        topic: 'Visión Integrada del Aseguramiento Organizacional y Tecnológico',
+        concepts: [
+          {
+            id: 'tic-recurso-vital',
+            name: 'Las TIC como Recurso Vital (no como fin)',
+            definition: 'Postura central del libro: las TIC son un medio y no un fin en sí mismo, un medio para gestionar adecuadamente la información que requiere la organización para tomar las decisiones que soportan las diferentes estrategias de negocio y su operación en general.',
+            fake: false,
+          },
+          {
+            id: 'ciclo-auditoria',
+            name: 'Ciclo General de Auditoría y Aseguramiento',
+            definition: 'Proceso que va desde la planeación, con sus diferentes subfases, hasta el seguimiento, a través del cual se asegura que las recomendaciones u opciones de mejora establecidas en un informe de auditoría se cumplan a cabalidad y de esta forma se lleve el riesgo empresarial y tecnológico a un nivel aceptable por la organización.',
+            fake: false,
+          },
+          {
+            id: 'auditoria-control-controles',
+            name: 'La Auditoría como "Control de Controles"',
+            definition: 'Sentencia difundida en la literatura académica y profesional: la auditoría moderna, sea empresarial o tecnológica, se basa en riesgos, y los riesgos, para llevarlos a un nivel aceptable, requieren controles; es necesario evaluar dichos controles para garantizar su eficacia y eficiencia.',
+            fake: false,
+          },
+          {
+            id: 'alineacion-aseg',
+            name: 'Alineación entre Aseguramiento Empresarial y Tecnológico',
+            definition: 'Principio que establece que cualquier evento adverso de los procesos y recursos de TIC o de la información afectará los procesos, recursos y estrategias del negocio, y como consecuencia el cumplimiento de sus objetivos. Por ello debe existir alineación entre el aseguramiento empresarial y el aseguramiento tecnológico.',
+            fake: false,
+          },
+          {
+            id: 'iso38500-referente',
+            name: 'ISO/IEC 38500:2008 como Referente de Gobierno TIC',
+            definition: 'Norma que proporciona un marco de principios para que los directores los utilicen en la evaluación, la dirección, el monitoreo y el uso de la tecnología de la información en sus organizaciones. Es uno de los dos principales referentes del gobierno corporativo de TIC, junto a COBIT 5.0.',
+            fake: false,
+          },
+          {
+            id: 'modelo-capas-12',
+            name: 'Modelo de 12 Capas Tecnológicas (Valencia, Marulanda y López, 2015)',
+            definition: 'Modelo compuesto por 12 capas tecnológicas interdependientes y organizadas de forma tal que, en caso de que se presente una falla en alguna de ellas, puede generarse un efecto dominó sobre las demás, lo que lleva a contemplar una gestión de riesgos integral. Las capas van desde los procesos de negocio (capa 1) hasta los sistemas de energía (capa 12).',
+            fake: false,
+          },
+          {
+            id: 'modelo-madurez-aseg-falso',
+            name: 'Modelo de Madurez del Aseguramiento Integrado (MMAI)',
+            definition: 'Herramienta de autoevaluación propuesta en el libro para que las organizaciones midan el nivel de integración de sus tres disciplinas de aseguramiento en una escala de 1 a 5, donde el nivel 5 corresponde a un aseguramiento combinado con mapas dinámicos actualizados en tiempo real.',
             fake: true,
           },
         ],
@@ -382,54 +482,54 @@ export const CHAPTERS = [
   },
 
   // ══════════════════════════════════════════════════════
-  //  CAPÍTULO 2 — Gobierno y Gestión de Riesgos de TI
+  //  CAPÍTULO 2 — Riesgos de TIC
   // ══════════════════════════════════════════════════════
   {
     id: 'riesgos-ti',
     num: '02',
-    name: 'Gobierno y Gestión de Riesgos de TI',
-    description: 'Metodologías, COBIT 5.0 y la Tríada CIA',
+    name: 'Riesgos de Tecnologías de Información y Comunicaciones',
+    description: 'Metodologías, COBIT 5.0, Tríada CIA y activos TIC',
     rounds: [
 
       // ── Ronda 1 ─────────────────────────────────────
       {
-        id: 'r2-metodologias',
-        topic: 'Metodologías de Gestión de Riesgos de TIC',
+        id: 'r2-marcos-riesgos',
+        topic: 'Marcos de Referencia para Riesgos de TIC',
         concepts: [
           {
-            id: 'risk-it',
-            name: 'Marco de Gestión de Riesgo de TI — RISK IT (ISACA)',
-            definition: 'Marco de ISACA basado en principios y procesos para gestionar riesgos de TI. Complementa a COBIT y establece tres dominios: gobierno del riesgo de TI, evaluación del riesgo de TI y respuesta al riesgo de TI.',
+            id: 'iso38500-riesgos',
+            name: 'ISO/IEC 38500:2008 y los Riesgos de TIC',
+            definition: 'Esta norma contempla los riesgos de TIC tanto en la definición de gobierno de TIC como en su estructura, si bien no de manera explícita, sí en su contexto, pues establece el control como parte de la definición, lo que en la lógica de las metodologías de gestión de riesgos conlleva la existencia de riesgos para poder definir controles.',
             fake: false,
           },
           {
-            id: 'magerit',
-            name: 'Metodología de Análisis y Gestión de Riesgos (MAGERIT v3)',
-            definition: 'Metodología de Análisis y Gestión de Riesgos de los Sistemas de Información, desarrollada y usada en la Administración Pública Española. Permite identificar activos, amenazas, vulnerabilidades e impactos de forma estructurada.',
+            id: 'cobit41-areas',
+            name: 'COBIT 4.1: Cinco Áreas de Enfoque para el Gobierno TIC',
+            definition: 'Establecidas por el IT Governance Institute (ITGI) e ISACA: alineamiento estratégico, entrega de valor, administración de riesgos, administración de recursos y medición del desempeño. La administración de riesgos es entendida como un área en la que los altos ejecutivos requieren concientizarse acerca de la evolución de las amenazas, la transparencia de los riesgos significativos y el apetito del riesgo.',
             fake: false,
           },
           {
-            id: 'octave',
-            name: 'Evaluación de Activos Críticos, Amenazas y Vulnerabilidades (OCTAVE)',
-            definition: 'Operationally Critical Threat, Asset and Vulnerability Evaluation. Colección de técnicas del SEI de Carnegie Mellon orientada a la organización y sus activos operativos más críticos.',
+            id: 'cobit5-riesgos-perspectivas',
+            name: 'COBIT 5 para Riesgos: Dos Perspectivas',
+            definition: 'Guía profesional de COBIT 5 liberada en 2013. Presenta dos perspectivas: la perspectiva de la función de riesgos (elementos necesarios para construir y mantener la función de riesgos en una organización) y la perspectiva de la gestión de riesgos (procesos orientados a identificar, analizar, responder y reportar los riesgos diariamente).',
             fake: false,
           },
           {
-            id: 'mehari',
-            name: 'Método Armonizado de Análisis de Riesgo (MEHARI)',
-            definition: 'Method for Harmonized Analysis of Risk. Desarrollado por CLUSIF (Club de Seguridad de la Información de Francia) desde 1996 para evaluar y gestionar riesgos de seguridad de la información de forma cuantitativa y cualitativa.',
+            id: 'riesgos-funcion-esencial',
+            name: 'Los Riesgos de TI como Función Esencial de Gobierno',
+            definition: 'Según Saleh y Alfantookh (2011), los riesgos de tecnologías de información son una disciplina considerada una de las funciones esenciales del gobierno de tecnologías de información. Su gestión está basada en métodos que permiten planear, identificar, analizar, evaluar, tratar y monitorear los riesgos asociados con las actividades, funciones, procesos y recursos de TIC.',
             fake: false,
           },
           {
-            id: 'cramm',
-            name: 'Método de Análisis y Gestión de Riesgos del Gobierno UK (CRAMM)',
-            definition: 'CCTA Risk Analysis and Management Method. Metodología del gobierno del Reino Unido desde 1987. Estructurada en tres etapas: establecimiento de objetivos de seguridad, análisis de riesgos y selección y recomendación de controles.',
+            id: 'risk-it-dominios',
+            name: 'Marco RISK IT de ISACA: Tres Dominios',
+            definition: 'Iniciativa de ISACA desarrollada como complemento de COBIT. Es un marco de riesgos de TIC basado en un conjunto de principios, guías, procesos de negocio y directrices conformado por tres ámbitos y nueve procesos interrelacionados: Gobierno del riesgo (RG), Evaluación del riesgo de TI (RE) y Respuesta al riesgo de TI (RR).',
             fake: false,
           },
           {
-            id: 'isareg',
-            name: 'Guías Integradas de Seguridad y Evaluación de Riesgos (ISAREG 360°)',
-            definition: 'Integrated Security Assurance and Risk Evaluation Guidelines. Estándar ISO/TC 45 publicado en 2014 para entornos digitales distribuidos que incorpora análisis de contexto geopolítico en la gestión de riesgos.',
+            id: 'iso31000-tic-falso',
+            name: 'ISO 31000 Perfil TIC (IT Risk Profile)',
+            definition: 'Anexo específico de la norma ISO 31000:2018 desarrollado por el comité ISO/TC 292 en colaboración con ISACA, que adapta el proceso general de gestión de riesgos a los activos tecnológicos y establece criterios de apetito de riesgo diferenciados para entornos de nube, IoT y sistemas de control industrial.',
             fake: true,
           },
         ],
@@ -437,43 +537,55 @@ export const CHAPTERS = [
 
       // ── Ronda 2 ─────────────────────────────────────
       {
-        id: 'r2-cobit',
-        topic: 'Procesos de Riesgo en COBIT 5.0',
+        id: 'r2-metodologias',
+        topic: 'Metodologías de Gestión de Riesgos de TIC',
         concepts: [
           {
-            id: 'edm03',
-            name: 'Asegurar la Optimización del Riesgo (EDM03)',
-            definition: 'Proceso de gobierno de COBIT 5.0 que identifica y gestiona el riesgo del valor empresarial asociado al uso de TI. Garantiza que el apetito de riesgo y la tolerancia al riesgo de la empresa sean entendidos, articulados y comunicados.',
+            id: 'nist-800-30',
+            name: 'NIST 800-30',
+            definition: 'Guía para la administración de riesgos de tecnologías de información del Instituto Nacional de Estándares y Tecnología (NIST) de los Estados Unidos, aplicable a todas las instituciones gubernamentales de este país y ampliamente referenciada. Plantea una estructura metodológica basada en 9 fases: caracterización del sistema, identificación de amenazas, identificación de vulnerabilidades, análisis del control, determinación de probabilidad, análisis del impacto, determinación del riesgo, recomendación de controles y documentación de resultados.',
             fake: false,
           },
           {
-            id: 'apo12',
-            name: 'Gestionar el Riesgo (APO12)',
-            definition: 'Proceso de gestión de COBIT 5.0 para identificar, evaluar y reducir continuamente los riesgos de TI dentro de niveles tolerables. Incluye seis prácticas de gestión: desde recopilar datos hasta responder al riesgo.',
+            id: 'magerit',
+            name: 'MAGERIT (Metodología de Análisis y Gestión de Riesgos)',
+            definition: 'Metodología de análisis y gestión de riesgos de los sistemas de información originada en España. Uno de los métodos más referenciados en publicaciones científicas, constituida como marco para el proceso de gestión de riesgos no solo en España sino a nivel internacional. Compuesta por tres libros: método, catálogo de elementos y guía de técnicas. Tiene como herramienta de soporte la aplicación Pilar.',
             fake: false,
           },
           {
-            id: 'apo1203',
-            name: 'Mantener un Perfil de Riesgo (APO12.03)',
-            definition: 'Práctica de gestión de APO12. Mantiene un inventario del riesgo conocido con sus atributos: frecuencia esperada, impacto potencial y respuestas actuales. Permite tener visibilidad del estado real del riesgo.',
+            id: 'octave',
+            name: 'OCTAVE (Operationally Critical Threat, Asset and Vulnerability Evaluation)',
+            definition: 'Colección de herramientas, técnicas y métodos para evaluar los riesgos de seguridad de la información, desarrollada por el Software Engineering Institute (SEI) de Carnegie Mellon (Talabis y Martin, 2012). Cuenta con tres versiones: Octave, Octave-S y Octave Allegro, cada una con variaciones en su concepción y actividades por fase.',
             fake: false,
           },
           {
-            id: 'apo1206',
-            name: 'Responder al Riesgo (APO12.06)',
-            definition: 'Práctica de gestión de APO12. Implementa medidas efectivas de forma oportuna para limitar la magnitud de las pérdidas derivadas de eventos relacionados con TI.',
+            id: 'mehari',
+            name: 'MEHARI (Method for Harmonized Analysis of Risk)',
+            definition: 'Método Armonizado de Gestión de Riesgos desarrollado por el CLUSIF (Club de la Seguridad de la Información de Francia) desde 1996, con el fin de asistir a diferentes ejecutivos de la organización (administradores operativos, jefes de sistemas, administradores de riesgos, auditores) en su esfuerzo para gestionar la seguridad de la información y los recursos asociados para reducir los riesgos.',
             fake: false,
           },
           {
-            id: 'edm0301',
-            name: 'Evaluar la Gestión de Riesgos (EDM03.01)',
-            definition: 'Práctica de gobierno dentro de EDM03. Examina y evalúa continuamente el efecto del riesgo sobre el uso actual y futuro de las TI en la empresa para determinar si el perfil de riesgo es aceptable.',
+            id: 'cramm',
+            name: 'CRAMM (CCTA Risk Analysis and Management Method)',
+            definition: 'Metodología del gobierno del Reino Unido para el análisis y gestión de riesgos. Estructurada en tres etapas principales: establecimiento de los objetivos de seguridad del sistema, análisis de riesgos del sistema (identificación de amenazas y vulnerabilidades), y selección y recomendación de controles de seguridad.',
             fake: false,
           },
           {
-            id: 'apo1207-falso',
-            name: 'Definir Presupuesto de Riesgos Tecnológicos (APO12.07)',
-            definition: 'Práctica de gestión de APO12 que establece el presupuesto anual dedicado a la mitigación de riesgos de TI y lo distribuye proporcionalmente entre las unidades de negocio según su nivel de exposición al riesgo residual.',
+            id: 'ms-security-guide',
+            name: 'The Security Risk Management Guide (Microsoft)',
+            definition: 'Guía de seguridad de riesgos desarrollada por Microsoft. Compuesta por cuatro fases y trece actividades: evaluación del riesgo (planificación de recolección, recopilación de datos y priorización de riesgos), apoyo en la toma de decisiones, implementación de controles y medición de la eficacia del programa.',
+            fake: false,
+          },
+          {
+            id: 'iso27005',
+            name: 'ISO/IEC 27005',
+            definition: 'Norma publicada en 2008 que forma parte de la familia ISO 27000. Proporciona directrices para la gestión de riesgos de tecnologías de información y da soporte de manera particular a la norma ISO/IEC 27001:2013 del sistema de gestión de seguridad de la información. Su estructura es muy similar a la ISO 31000.',
+            fake: false,
+          },
+          {
+            id: 'ebios-falso',
+            name: 'EBIOS (Expression des Besoins et Identification des Objectifs de Sécurité)',
+            definition: 'Metodología francesa de gestión de riesgos de seguridad de la información desarrollada por la ANSSI (Agencia Nacional de Seguridad de Sistemas de Información de Francia) desde 2004. Al igual que MEHARI, es ampliamente utilizada en la administración pública europea y estructurada en cinco módulos: contexto, eventos temidos, escenarios estratégicos, escenarios operativos y tratamiento del riesgo.',
             fake: true,
           },
         ],
@@ -481,43 +593,55 @@ export const CHAPTERS = [
 
       // ── Ronda 3 ─────────────────────────────────────
       {
-        id: 'r2-cia',
-        topic: 'La Tríada CIA de Seguridad de la Información',
+        id: 'r2-cobit',
+        topic: 'Procesos de Riesgo en COBIT 5.0',
         concepts: [
           {
-            id: 'confidencialidad',
-            name: 'Confidencialidad (C de CIA)',
-            definition: 'Propiedad de que la información no esté disponible o sea revelada a individuos, entidades o procesos no autorizados (ISO/IEC 27000). Protege que solo accedan quienes tienen permiso.',
+            id: 'edm03',
+            name: 'Asegurar la Optimización del Riesgo (EDM03)',
+            definition: 'Proceso de gobierno de COBIT 5.0, bajo el dominio "Evaluar, Dirigir y Supervisar" (EDM). Requerido para asegurar que el apetito y la tolerancia al riesgo de una organización sean entendidos, articulados y comunicados, y que el riesgo para el valor de la empresa relacionado con el uso de las TIC sea identificado y gestionado.',
             fake: false,
           },
           {
-            id: 'integridad',
-            name: 'Integridad (I de CIA)',
-            definition: 'Propiedad de exactitud y completitud de la información. Salvaguarda la información ante modificación o destrucción no autorizada, garantizando que los datos sean confiables y precisos.',
+            id: 'edm0301',
+            name: 'EDM03.01: Evaluar la Gestión de Riesgos',
+            definition: 'Primera práctica de gobierno dentro de EDM03. Examina y evalúa continuamente el efecto del riesgo sobre el uso actual y futuro de las TIC en la empresa. Considera si el apetito de riesgo de la empresa es apropiado y si el riesgo sobre el valor de la empresa relacionado con el uso de TIC es identificado y gestionado.',
             fake: false,
           },
           {
-            id: 'disponibilidad',
-            name: 'Disponibilidad (D de CIA)',
-            definition: 'Propiedad de la información de ser accesible y utilizable a petición de una entidad autorizada cuando lo requieran los procesos de negocio. Implica mantener los sistemas operativos y accesibles.',
+            id: 'edm0302',
+            name: 'EDM03.02: Orientar la Gestión de Riesgos',
+            definition: 'Segunda práctica de gobierno dentro de EDM03. Orienta el establecimiento de prácticas de gestión de riesgos para asegurar que el riesgo en TIC actual no excede el apetito de riesgo definido por la organización.',
             fake: false,
           },
           {
-            id: 'no-repudio',
-            name: 'No Repudio (atributo complementario de CIA)',
-            definition: 'Atributo complementario a la tríada CIA que impide que alguien niegue haber realizado una determinada acción sobre la información (envío, recepción o modificación). Se sustenta en mecanismos de firma digital y registros de auditoría.',
+            id: 'edm0303',
+            name: 'EDM03.03: Supervisar la Gestión de Riesgos',
+            definition: 'Tercera práctica de gobierno dentro de EDM03. Supervisa los objetivos y las métricas clave de los procesos de gestión de riesgo y establece cómo las desviaciones o los problemas serán identificados, seguidos e informados para su resolución.',
             fake: false,
           },
           {
-            id: 'autenticidad',
-            name: 'Autenticidad (atributo complementario de CIA)',
-            definition: 'Atributo que complementa la tríada CIA, garantizando que la identidad de quien actúa sobre la información es verificable y genuina. Previene la suplantación de identidad.',
+            id: 'apo12',
+            name: 'Gestionar el Riesgo (APO12)',
+            definition: 'Proceso de gestión de COBIT 5.0 en el dominio "Alinear, Planificar y Organizar" (APO). Permite identificar, evaluar y reducir los riesgos de TIC de forma continua, dentro de los niveles de tolerancia establecidos por la dirección de la empresa. Contempla 6 prácticas de gestión: recopilar datos, analizar el riesgo, mantener un perfil de riesgo, expresar el riesgo, definir un portafolio de acciones y responder al riesgo.',
             fake: false,
           },
           {
-            id: 'trazabilidad-activa',
-            name: 'Trazabilidad Activa en Tiempo Real (atributo CIA extendido)',
-            definition: 'Capacidad de auditar en tiempo real todas las rutas de acceso a activos de información según el protocolo COBIT 5-TA, considerada el sexto atributo oficial de la tríada CIA extendida en la norma ISO/IEC 27001:2022.',
+            id: 'apo1203',
+            name: 'APO12.03: Mantener un Perfil de Riesgo',
+            definition: 'Práctica de gestión de APO12. Mantiene un inventario del riesgo conocido y atributos de riesgo (incluyendo frecuencia esperada, impacto potencial y respuestas) y de otros recursos, capacidades y actividades de control actuales y relacionadas.',
+            fake: false,
+          },
+          {
+            id: 'apo1206',
+            name: 'APO12.06: Responder al Riesgo',
+            definition: 'Práctica de gestión de APO12. Responde de una forma oportuna con medidas efectivas que limiten la magnitud de pérdida por eventos relacionados con TIC.',
+            fake: false,
+          },
+          {
+            id: 'apo1207-falso',
+            name: 'APO12.07: Reportar el Riesgo Residual',
+            definition: 'Séptima práctica de gestión del proceso APO12 de COBIT 5.0, que establece el procedimiento formal para comunicar el riesgo residual —una vez aplicadas las salvaguardas— al consejo directivo y a los propietarios de riesgo correspondientes, asegurando la trazabilidad entre el riesgo inherente valorado y las medidas de mitigación implementadas.',
             fake: true,
           },
         ],
@@ -525,43 +649,55 @@ export const CHAPTERS = [
 
       // ── Ronda 4 ─────────────────────────────────────
       {
-        id: 'r2-activos',
-        topic: 'Clasificación de Activos Tecnológicos',
+        id: 'r2-cia',
+        topic: 'La Tríada CIA de Seguridad de la Información',
         concepts: [
           {
-            id: 'activos-datos',
-            name: 'Activos de Datos e Información',
-            definition: 'Primera categoría de activos TIC. Incluye bases de datos, archivos, contratos, documentación, registros de auditoría y cualquier dato que tenga valor para la organización y requiera protección.',
+            id: 'triada-cia',
+            name: 'Tríada CIA (Confidentiality, Integrity, Availability)',
+            definition: 'Los tres parámetros principales para medir el impacto de cualquier riesgo tecnológico sobre la información. De acuerdo con el análisis comparativo de 10 metodologías de riesgos de TIC realizado por Parra et al. (2013), los criterios para medir el impacto del riesgo en el 100% de ellas contemplan la tríada CIA.',
             fake: false,
           },
           {
-            id: 'activos-software',
-            name: 'Activos de Software y Aplicaciones',
-            definition: 'Categoría de activos TIC que incluye software de aplicación, software de sistemas, herramientas de desarrollo, utilidades y sistemas de información. Son los activos que procesan y gestionan la información.',
+            id: 'confidencialidad',
+            name: 'Confidencialidad (C de CIA)',
+            definition: 'Asociada con el acceso y uso de la información únicamente por parte de quienes se encuentran autorizados y tienen la necesidad de conocerla. En términos formales, y de acuerdo con la norma ISO/IEC 27000, es la propiedad que tiene la información de no estar disponible o revelada a individuos, entidades o procesos no autorizados.',
             fake: false,
           },
           {
-            id: 'activos-hardware',
-            name: 'Activos de Hardware e Infraestructura Física',
-            definition: 'Categoría de activos TIC que incluye equipos informáticos, servidores, equipos de comunicaciones, medios de almacenamiento y equipamiento técnico necesario para el procesamiento de la información.',
+            id: 'integridad',
+            name: 'Integridad (I de CIA)',
+            definition: 'La propiedad de salvaguardar la exactitud e integridad de la información y de los activos tecnológicos ante su modificación o destrucción no autorizada. La norma ISO/IEC 27000:2014 la define como la propiedad de exactitud y completitud: si la información está completa y libre de errores, es íntegra.',
             fake: false,
           },
           {
-            id: 'activos-servicios',
-            name: 'Activos de Servicios',
-            definition: 'Categoría de activos TIC que incluye servicios informáticos y de telecomunicaciones, servicios de soporte técnico y servicios en la nube que soportan los procesos de negocio de la organización.',
+            id: 'disponibilidad',
+            name: 'Disponibilidad (D de CIA)',
+            definition: 'Hace referencia a que los usuarios autorizados tienen acceso a la información y a los activos tecnológicos cuando lo requieran. La norma ISO/IEC 27000:2016 la define como la propiedad de ser accesible y utilizable a petición de una entidad autorizada. Dentro de las amenazas más cotidianas que afectan la disponibilidad se encuentra la denegación del servicio.',
             fake: false,
           },
           {
-            id: 'activos-personas',
-            name: 'Activos de Personas y Competencias',
-            definition: 'Categoría de activos TIC que incluye el personal de TI, sus calificaciones, habilidades, experiencia y conocimiento técnico. El capital humano especializado es un activo crítico del área de tecnología.',
+            id: 'atributos-complementarios',
+            name: 'Atributos Complementarios de la CIA',
+            definition: 'Además de la tríada CIA, existen otros atributos considerados complementarios de la seguridad de la información según la norma ISO/IEC: la autenticidad, la responsabilidad (accountability), la confiabilidad y el no repudio. No todos los modelos de riesgos los contemplan, pero sí la totalidad contempla CIA.',
             fake: false,
           },
           {
-            id: 'activos-reputacionales',
-            name: 'Activos Reputacionales Digitales (ARD)',
-            definition: 'Categoría de activos TIC definida en la norma ISO/IEC 27005:2022 que cuantifica el valor de la marca digital, la reputación en redes sociales y la confianza del cliente como activos asegurables bajo el esquema COBIT 5.',
+            id: 'no-repudio',
+            name: 'No Repudio (Atributo Complementario)',
+            definition: 'Atributo complementario a la tríada CIA que impide que alguien niegue haber realizado una determinada acción sobre la información (envío, recepción o modificación). Se sustenta en mecanismos de firma digital y registros de auditoría, y está reconocido como atributo complementario por la norma ISO/IEC.',
+            fake: false,
+          },
+          {
+            id: 'nist-fips199',
+            name: 'NIST FIPS PUB 199: Parámetros de Impacto CIA',
+            definition: 'Estándares para la categorización de seguridad de la información federal y los sistemas de información del NIST (National Institute of Standards and Technology), que establecen parámetros de impacto bajo, moderado y alto para evaluar cada uno de los tres elementos de la tríada CIA: confidencialidad, integridad y disponibilidad.',
+            fake: false,
+          },
+          {
+            id: 'trazabilidad-activa-falso',
+            name: 'Trazabilidad Activa (Sexto Atributo CIA Extendido)',
+            definition: 'Capacidad definida en la actualización de la norma ISO/IEC 27000:2018 que establece la trazabilidad en tiempo real de todos los flujos de acceso a activos de información como el sexto atributo oficial de la tríada CIA extendida, equiparable en importancia a la confidencialidad y la disponibilidad en entornos de computación distribuida.',
             fake: true,
           },
         ],
@@ -569,25 +705,149 @@ export const CHAPTERS = [
 
       // ── Ronda 5 ─────────────────────────────────────
       {
+        id: 'r2-activos-capas',
+        topic: 'Activos TIC y las 12 Capas Tecnológicas',
+        concepts: [
+          {
+            id: 'capa1-procesos',
+            name: 'Capa 1: Procesos de Negocio',
+            definition: 'Primera capa del modelo de Valencia, Marulanda y López (2015). Son todas aquellas actividades desarrolladas por la organización para cumplir con sus objetivos. Agrupadas en categorías como procedimientos y macroprocesos (estratégicos, misionales y de apoyo). Son la capa de mayor nivel de abstracción y la que más depende de las capas inferiores.',
+            fake: false,
+          },
+          {
+            id: 'capa2-servicios',
+            name: 'Capa 2: Servicios de TIC',
+            definition: 'Segunda capa del modelo. Según la Information Technology Infrastructure Library (ITIL), un servicio de TIC es un medio por el cual se entrega valor a los clientes (usuarios) facilitando un resultado deseado, sin que estos asuman los costos y riesgos específicos. Los servicios son desarrollados por las personas y construidos a partir de la infraestructura tecnológica y los procesos de gestión y operación de TIC.',
+            fake: false,
+          },
+          {
+            id: 'capa3-datos',
+            name: 'Capa 3: Datos, Información y Conocimiento',
+            definition: 'Tercera capa del modelo. Considerados los recursos más valiosos para la organización y los que, en definitiva, requieren mayor nivel de protección. Es la capa que concentra las propiedades de la tríada CIA con mayor intensidad.',
+            fake: false,
+          },
+          {
+            id: 'capa4-sistemas-transac',
+            name: 'Capa 4: Sistemas de Información Transaccionales',
+            definition: 'Cuarta capa del modelo. Son todos aquellos sistemas de información que utiliza la organización para automatizar sus procesos de negocio. Ejemplos: ERP (Enterprise Resource Planning), CRM (Customer Relation Management), sistemas de información de nómina y sistemas de información de ventas.',
+            fake: false,
+          },
+          {
+            id: 'capa6-motores-bd',
+            name: 'Capa 6: Motores de Bases de Datos',
+            definition: 'Sexta capa del modelo. Equivale a lo que en el mercado se conoce como sistemas gestores de bases de datos (SGBD), los cuales permiten añadir, borrar, modificar, almacenar y analizar los datos que tiene una organización. Principales ejemplos: Oracle, SQL Server, PostgreSQL y MySQL.',
+            fake: false,
+          },
+          {
+            id: 'capa9-servidores',
+            name: 'Capa 9: Servidores (físicos, virtuales y en la nube)',
+            definition: 'Novena capa del modelo. Computadores dotados de características especiales (mayor capacidad de procesamiento, multitarea, mayores capacidades de almacenamiento, mayor capacidad en memoria) al servicio de otros dispositivos, para tareas especializadas. Tres tipos genéricos: servidores físicos, servidores virtuales y servidores en la nube.',
+            fake: false,
+          },
+          {
+            id: 'capa12-energia',
+            name: 'Capa 12: Sistemas de Energía',
+            definition: 'Duodécima capa del modelo, considerada una de las más importantes de la infraestructura tecnológica por ser la que permite que las demás capas puedan cumplir su función. Incluye todos los servicios y dispositivos que permiten que los dispositivos físicos de procesamiento de información puedan operar, generadores de energía alterna y dispositivos de resguardo como bancos de baterías y UPS.',
+            fake: false,
+          },
+          {
+            id: 'capa13-nube-falso',
+            name: 'Capa 13: Ecosistemas de Nube e Interoperabilidad',
+            definition: 'Decimotercera capa incorporada al modelo de Valencia, Marulanda y López en su versión actualizada de 2018, que reconoce los entornos cloud híbridos, las APIs de integración y los servicios de interoperabilidad como una capa diferenciada de infraestructura, con riesgos propios distintos a los de los servidores en nube de la capa 9.',
+            fake: true,
+          },
+        ],
+      },
+
+      // ── Ronda 6 ─────────────────────────────────────
+      {
+        id: 'r2-taxonomia-valoracion',
+        topic: 'Taxonomía y Valoración de Riesgos de TIC',
+        concepts: [
+          {
+            id: 'valoracion-cuantitativa',
+            name: 'Valoración Cuantitativa del Riesgo',
+            definition: 'Enfoque que evalúa numéricamente la probabilidad y el impacto del riesgo. Con tal objetivo utiliza, en algunos casos, teorías de probabilidades y estadísticas para determinar el nivel de riesgo. Permite expresar el riesgo en términos monetarios o porcentuales.',
+            fake: false,
+          },
+          {
+            id: 'valoracion-cualitativa',
+            name: 'Valoración Cualitativa del Riesgo',
+            definition: 'Enfoque más usado en el ámbito productivo. Está basado en escalas descriptivas, por lo general entre 3 y 5 niveles (por ejemplo: bajo, medio, alto). En algunos casos se acude a la opinión de los expertos para seleccionar el nivel al cual corresponde la probabilidad de ocurrencia o el impacto en caso de ocurrir el riesgo.',
+            fake: false,
+          },
+          {
+            id: 'valoracion-hibrida',
+            name: 'Valoración Híbrida del Riesgo',
+            definition: 'Corresponde al uso de valoraciones cuantitativas y cualitativas en las diferentes fases de la gestión del riesgo. Se puede utilizar un enfoque cuantitativo para la valoración de activos y un enfoque cualitativo para la valoración de probabilidad e impacto.',
+            fake: false,
+          },
+          {
+            id: 'riesgo-propagado',
+            name: 'Riesgo Propagado',
+            definition: 'Categoría de medición del riesgo en la taxonomía de Shameli-Sendi et al. (2016). Su medición depende del efecto que tengan los riesgos de los activos de los cuales depende el activo objeto de análisis, es decir, considera el efecto dominó entre capas tecnológicas interdependientes.',
+            fake: false,
+          },
+          {
+            id: 'riesgo-no-propagado',
+            name: 'Riesgo No Propagado',
+            definition: 'Categoría de medición del riesgo en la taxonomía de Shameli-Sendi et al. (2016). Se basa en la evaluación individual de cada riesgo, sin tener en cuenta el efecto de la propagación del riesgo que viene de otros recursos tecnológicos del cual depende.',
+            fake: false,
+          },
+          {
+            id: 'perspectiva-activos',
+            name: 'Perspectiva de Análisis Basada en Activos',
+            definition: 'Una de las tres perspectivas de la taxonomía de metodologías de riesgos de TIC. Es donde se concentra la mayor cantidad de las metodologías existentes. Analiza el riesgo en función de los activos tecnológicos de la organización (hardware, software, datos, etc.) y sus dependencias.',
+            fake: false,
+          },
+          {
+            id: 'catalogo-amenazas',
+            name: 'Catálogo de Amenazas de TIC',
+            definition: 'Herramienta útil para predeterminar las amenazas potenciales que pueden afectar a una organización; debe ser construida en función del contexto de la organización. Se pueden construir catálogos genéricos de amenazas de TIC. Ejemplo: la tabla propuesta por Rahmad et al. (2010) a partir de una combinación de MAGERIT e ISO/IEC 27005, con categorías: amenazas naturales, fallas técnicas o ambientales, accidentes humanos y acciones humanas deliberadas.',
+            fake: false,
+          },
+          {
+            id: 'matriz-calor-falso',
+            name: 'Matriz de Calor Estandarizada ISO (Heat Map)',
+            definition: 'Herramienta definida en el Anexo B de la norma ISO/IEC 27005:2018 que establece un formato universal de representación gráfica del nivel de riesgo residual, donde el eje X corresponde al impacto CIA y el eje Y a la probabilidad de ocurrencia, con zonas de color codificadas según el apetito de riesgo organizacional.',
+            fake: true,
+          },
+        ],
+      },
+
+      // ── Ronda 7 ─────────────────────────────────────
+      {
         id: 'r2-cert',
         topic: 'Certificaciones Profesionales en Riesgos y Auditoría TI',
         concepts: [
           {
             id: 'crisc',
-            name: 'Certificación en Riesgo y Control de Sistemas de Información (CRISC)',
-            definition: 'Certified in Risk and Information Systems Control. Certificación de ISACA considerada una de las mejor pagadas en TI. Requiere 3 años de experiencia en al menos 2 de 4 dominios: identificación, evaluación, respuesta y monitoreo del riesgo.',
+            name: 'CRISC (Certified in Risk and Information Systems Control)',
+            definition: 'Certificación establecida en 2009 por ISACA. Representa el respaldo de contar con conocimientos y experiencia práctica para integrar la gestión del riesgo organizacional con habilidades de control de sistemas de información. Fue catalogada por la encuesta IT Skills and Salary Survey 2015 como la certificación mejor valorada dentro de las certificaciones de tecnologías de información. Requiere mínimo 3 años de experiencia en al menos 2 de sus 4 dominios de conocimiento.',
+            fake: false,
+          },
+          {
+            id: 'crisc-dominios',
+            name: 'Cuatro Dominios de Conocimiento del CRISC',
+            definition: 'La certificación CRISC contempla cuatro dominios: (1) identificación de riesgos, (2) evaluación de riesgos, (3) mitigación y respuesta al riesgo, e (4) informes y monitoreo sobre controles y riesgos. El profesional debe demostrar experiencia de al menos 3 años consecutivos en mínimo 2 de estos 4 dominios.',
             fake: false,
           },
           {
             id: 'cisa',
-            name: 'Auditor Certificado de Sistemas de Información (CISA)',
-            definition: 'Certified Information Systems Auditor. Certificación de ISACA para profesionales de auditoría de TI. La sigla CISA también puede referirse al cargo Chief Information System Auditor dentro de la tabla de perfiles del aseguramiento tecnológico.',
+            name: 'CISA (Certified Information Systems Auditor)',
+            definition: 'Certificación de ISACA para profesionales de auditoría de TI. La sigla CISA también puede referirse al cargo Chief Information System Auditor dentro de la tabla de perfiles del aseguramiento tecnológico, según el libro de Valencia et al.',
             fake: false,
           },
           {
             id: 'cism',
-            name: 'Gerente Certificado de Seguridad de la Información (CISM)',
+            name: 'CISM (Certified Information Security Manager)',
             definition: 'Certified Information Security Manager. Certificación de ISACA orientada a quienes gestionan, diseñan y supervisan programas de seguridad de la información a nivel gerencial y estratégico.',
+            fake: false,
+          },
+          {
+            id: 'cia-cert',
+            name: 'CIA (Certified Internal Auditor)',
+            definition: 'Única certificación global de auditoría interna reconocida y otorgada por el IIA. Es la certificación más representativa para quienes ejercen la función de tercera línea de defensa en el modelo 3LoD.',
             fake: false,
           },
           {
@@ -597,15 +857,9 @@ export const CHAPTERS = [
             fake: false,
           },
           {
-            id: 'cia-cert',
-            name: 'Auditor Interno Certificado (CIA)',
-            definition: 'Certified Internal Auditor. Única certificación global de auditoría interna reconocida y otorgada por el IIA. Es la certificación más representativa para quienes ejercen la función de tercera línea de defensa.',
-            fake: false,
-          },
-          {
-            id: 'cgrc',
-            name: 'Profesional Certificado en Gobierno de Riesgos y Cumplimiento (CGRC)',
-            definition: 'Certified Governance Risk and Compliance Professional. Certificación conjunta del OCEG e ISACA, creada en 2018, que acredita el dominio integral del marco GRC incluyendo sus dimensiones organizacional, tecnológica y regulatoria.',
+            id: 'cgeit-falso',
+            name: 'CGEIT (Certified in the Governance of Enterprise IT)',
+            definition: 'Certificación de ISACA mencionada en el libro como la principal acreditación a nivel gerencial para los responsables del gobierno corporativo de TIC, dirigida al CIO y al Director de Gobierno TIC. Requiere 5 años de experiencia en responsabilidades de gobierno de TI y su examen cubre cinco dominios alineados con el marco COBIT 5.',
             fake: true,
           },
         ],
@@ -620,29 +874,39 @@ export const CHAPTERS = [
         example: 'Una empresa bancaria implementa ISO 31000 + RISK IT para gestionar el riesgo de una brecha en su sistema de pagos: lo identifica, estima su impacto en $5M y decide transferirlo contratando un seguro cibernético.',
       },
       {
-        term: 'Triada CIA',
-        definition: 'Confidencialidad, Integridad y Disponibilidad. Los tres pilares para medir el impacto de cualquier riesgo tecnológico sobre la información. Un ataque exitoso compromete uno o más de estos atributos.',
+        term: 'Tríada CIA',
+        definition: 'Confidencialidad, Integridad y Disponibilidad. Los tres pilares para medir el impacto de cualquier riesgo tecnológico sobre la información. Contemplada por el 100% de las metodologías de riesgos de TIC según Parra et al. (2013).',
         example: 'Un ransomware ataca los tres: cifra los archivos (confidencialidad), los altera (integridad) y los hace inaccesibles (disponibilidad). El impacto se mide por cuál atributo fue más afectado.',
       },
       {
         term: 'COBIT 5.0',
-        definition: 'Marco de ISACA para el gobierno y gestión de TI. Sus procesos clave de riesgo son: EDM03 (asegurar la optimización del riesgo) y APO12 (gestionar el riesgo). Establece 37 procesos en 5 dominios.',
-        example: 'El auditor usa APO12.03 para revisar si la empresa mantiene actualizado su registro de riesgos, y EDM03.01 para verificar que la junta directiva haya definido su apetito de riesgo.',
+        definition: 'Marco de ISACA para el gobierno y gestión de TI. Sus procesos clave de riesgo son: EDM03 (asegurar la optimización del riesgo, con 3 prácticas) y APO12 (gestionar el riesgo, con 6 prácticas).',
+        example: 'El auditor usa APO12.03 para revisar si la empresa mantiene actualizado su registro de riesgos, y EDM03.01 para verificar que la junta directiva haya evaluado su apetito de riesgo.',
       },
       {
         term: 'RISK IT (ISACA)',
-        definition: 'Marco de ISACA publicado en 2009 que complementa a COBIT con tres dominios: gobierno del riesgo de TI (RG), evaluación del riesgo de TI (RE) y respuesta al riesgo de TI (RR).',
+        definition: 'Marco de ISACA que complementa a COBIT con tres dominios: Gobierno del riesgo de TI (RG), Evaluación del riesgo de TI (RE) y Respuesta al riesgo de TI (RR), con nueve procesos interrelacionados.',
         example: 'Un gerente de riesgos usa RISK IT — dominio RE — para evaluar si la vulnerabilidad detectada en el servidor de correos representa un riesgo alto o tolerable para el negocio.',
       },
       {
         term: 'MAGERIT v3',
-        definition: 'Metodología española de análisis y gestión de riesgos de los sistemas de información. Utiliza un enfoque de activos → amenazas → vulnerabilidades → impacto para calcular el riesgo residual y seleccionar salvaguardas.',
+        definition: 'Metodología española de análisis y gestión de riesgos de los sistemas de información. Compuesta por tres libros: método, catálogo de elementos y guía de técnicas. Herramienta de soporte: Pilar.',
         example: 'Una entidad pública española usa MAGERIT para catalogar sus activos (servidores, base de datos de ciudadanos), identificar la amenaza de acceso no autorizado y seleccionar salvaguardas de control de acceso.',
       },
       {
+        term: 'Modelo de 12 Capas TIC',
+        definition: 'Propuesto por Valencia, Marulanda y López (2015). 12 capas tecnológicas interdependientes organizadas desde los procesos de negocio (capa 1) hasta los sistemas de energía (capa 12), donde una falla en una capa puede generar un efecto dominó sobre las demás.',
+        example: 'Una falla en la capa 12 (energía) deja sin funcionamiento los servidores (capa 9), lo que tumba las bases de datos (capa 6), los sistemas transaccionales (capa 4) y finalmente los procesos de negocio (capa 1).',
+      },
+      {
         term: 'CRISC',
-        definition: 'Certified in Risk and Information Systems Control. Certificación de ISACA para profesionales que identifican y gestionan riesgos de TI. Es considerada una de las certificaciones TI con mayor retorno salarial a nivel mundial.',
+        definition: 'Certified in Risk and Information Systems Control. Certificación de ISACA (2009) para profesionales que integran la gestión del riesgo organizacional con el control de sistemas de información. Catalogada como la certificación TI mejor valorada por IT Skills and Salary Survey 2015.',
         example: 'Un profesional CRISC lidera el comité de riesgos de TI de una aseguradora y certifica ante la junta directiva que el nivel de riesgo residual está dentro del apetito de riesgo aprobado.',
+      },
+      {
+        term: 'Catálogo de Amenazas',
+        definition: 'Herramienta para predeterminar amenazas potenciales según el contexto organizacional. Categorías genéricas: amenazas naturales, fallas técnicas o ambientales, accidentes humanos y acciones humanas deliberadas (Rahmad et al., 2010, basado en MAGERIT e ISO/IEC 27005).',
+        example: 'Una organización construye su catálogo de amenazas y detecta que el sabotaje interno (acciones humanas deliberadas) es la categoría con mayor probabilidad para su contexto, priorizando controles de acceso privilegiado.',
       },
     ],
   },
