@@ -1,0 +1,159 @@
+// sprites.jsx — Pixel-art characters as inline SVG
+// 8 unique heroes/classes, each 48×48px grid scaled to any size
+
+export const SPRITE_DEFS = [
+  { id: 'knight',   label: 'Knight',   color: '#4a90d9', accent: '#f0e040' },
+  { id: 'mage',     label: 'Mage',     color: '#9b59b6', accent: '#3dffc0' },
+  { id: 'rogue',    label: 'Rogue',    color: '#e74c3c', accent: '#ff8c42' },
+  { id: 'ranger',   label: 'Ranger',   color: '#27ae60', accent: '#f0e040' },
+  { id: 'paladin',  label: 'Paladin',  color: '#f39c12', accent: '#fff' },
+  { id: 'warlock',  label: 'Warlock',  color: '#1a1a4e', accent: '#ff3d5a' },
+]
+
+// Each sprite: 16x16 pixel grid, each cell = 1 unit
+// We draw via SVG rects for true pixel art look
+
+const PIXELS = {
+  knight: {
+    body: '#4a90d9', head: '#ffe4b5', hair: '#8b4513', armor: '#c0c0c0',
+    grid: [
+      '....hhhh....',
+      '...hfffh....',
+      '...hfffh....',
+      '...AAAA....',
+      '..AAAAAA...',
+      '..Abbbba...',
+      '..AbbbBA...',
+      '...llll....',
+      '...l..l....',
+      '...b..b....',
+    ],
+    palette: { h:'#8b4513', f:'#ffe4b5', A:'#9ab', a:'#cde', b:'#778', l:'#4a90d9', '.':'transparent' },
+  },
+  mage: {
+    grid: [
+      '....pppp....',
+      '...pfffp....',
+      '...pfffp....',
+      '....PPPP....',
+      '...rPPPr....',
+      '...rPPPr....',
+      '...rrrrr....',
+      '....rwr....',
+      '....r.r....',
+      '...ss.ss...',
+    ],
+    palette: { p:'#6a0dad', f:'#ffe4b5', P:'#9b59b6', r:'#7d3c98', w:'#fff', s:'#4a235a', '.':'transparent' },
+  },
+  rogue: {
+    grid: [
+      '....dddd....',
+      '...dfffd....',
+      '...dfffd....',
+      '....kkkk....',
+      '...lkkkl....',
+      '...lkkkl....',
+      '...lllll....',
+      '....l.l.....',
+      '....b.b.....',
+      '...bb.bb...',
+    ],
+    palette: { d:'#333', f:'#ffe4b5', k:'#e74c3c', l:'#555', b:'#222', '.':'transparent' },
+  },
+  ranger: {
+    grid: [
+      '....gggg....',
+      '...gfffg....',
+      '...gfffg....',
+      '....vvvv....',
+      '...gvvvg....',
+      '...gvvvg....',
+      '...ggggg....',
+      '....g.g.....',
+      '....b.b.....',
+      '...bb.bb...',
+    ],
+    palette: { g:'#27ae60', f:'#ffe4b5', v:'#1e8449', b:'#196f3d', '.':'transparent' },
+  },
+  paladin: {
+    grid: [
+      '....yyyy....',
+      '...yffyy....',
+      '...yffyy....',
+      '....WWWW....',
+      '...yWWWy....',
+      '...yWWWy....',
+      '...yyyyy....',
+      '....y.y.....',
+      '....b.b.....',
+      '...yy.yy...',
+    ],
+    palette: { y:'#f39c12', f:'#ffe4b5', W:'#fff', b:'#a04000', '.':'transparent' },
+  },
+  warlock: {
+    grid: [
+      '....cccc....',
+      '...cfffc....',
+      '...cfffc....',
+      '....DDDD....',
+      '...cDDDc....',
+      '...cDDDc....',
+      '...ccccc....',
+      '....c.c.....',
+      '....r.r.....',
+      '...cc.cc...',
+    ],
+    palette: { c:'#1a1a4e', f:'#c8a0a0', D:'#2c2c7e', r:'#ff3d5a', '.':'transparent' },
+  },
+}
+
+function PixelGrid({ grid, palette, size = 4 }) {
+  const rows = grid.length
+  const cols = Math.max(...grid.map(r => r.length))
+  return (
+    <svg
+      width={cols * size} height={rows * size}
+      style={{ imageRendering: 'pixelated' }}
+      viewBox={`0 0 ${cols} ${rows}`}
+    >
+      {grid.map((row, y) =>
+        row.split('').map((ch, x) => {
+          const fill = palette[ch]
+          if (!fill || fill === 'transparent') return null
+          return <rect key={`${x}-${y}`} x={x} y={y} width={1} height={1} fill={fill} />
+        })
+      )}
+    </svg>
+  )
+}
+
+export function Sprite({ id, size = 4, flip = false, style = {} }) {
+  const def = PIXELS[id] ?? PIXELS.knight
+  return (
+    <div style={{
+      display: 'inline-block',
+      transform: flip ? 'scaleX(-1)' : 'scaleX(1)',
+      imageRendering: 'pixelated',
+      ...style,
+    }}>
+      <PixelGrid grid={def.grid} palette={def.palette} size={size} />
+    </div>
+  )
+}
+
+// Animated attack sprite — flashes and moves
+export function AttackSprite({ id, size = 4, flip = false, isAttacking = false, isTakingHit = false }) {
+  return (
+    <div style={{
+      display: 'inline-block',
+      transform: flip ? 'scaleX(-1)' : 'scaleX(1)',
+      imageRendering: 'pixelated',
+      filter: isTakingHit ? 'brightness(3) saturate(0)' : isAttacking ? 'brightness(1.4)' : 'brightness(1)',
+      transition: 'filter 0.1s',
+    }}>
+      <PixelGrid grid={PIXELS[id]?.grid ?? PIXELS.knight.grid}
+                 palette={PIXELS[id]?.palette ?? PIXELS.knight.palette}
+                 size={size} />
+    </div>
+  )
+}
